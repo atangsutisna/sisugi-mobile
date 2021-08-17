@@ -14,7 +14,8 @@ export class LoginService {
   constructor(private httpClient: HttpClient) {
     this.user.next({
       loggedIn: true,
-      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJzaXN1Z2ktZm9ybTIudGVzdCIsImV4cCI6MTYyOTI0NzAzNCwidXNlcl9pZCI6Mzk1LCJwdXNrZXNtYXNfaWQiOjI4NDV9.UbF2xUGnnYEg8MLAoSU8oUKjoMkprptadcL9Apy2VmYMhG1Jqu-Wvl_pMj70RFpKb5X2Gs9_H1xsdTEw8Pbi8w'
+      token:
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJzaXN1Z2ktZm9ybTIudGVzdCIsImV4cCI6MTYyOTI3NDg2NSwidXNlcl9pZCI6Mzk1LCJwdXNrZXNtYXNfaWQiOjI4NDV9.qIh_bCE3Xxmg-hrbVEwi_0NxqpIiBi_wBA78wPilk5uACdbF7blJsZ_u1EYV-RRHir1OCwCs8NfwqK9R5QU3ZA',
     });
   }
 

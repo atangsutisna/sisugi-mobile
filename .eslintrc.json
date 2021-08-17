@@ -39,7 +39,8 @@
         "max-len": "off",
         "object-shorthand": 0,
         "@typescript-eslint/naming-convention": "off",
-        "eqeqeq": "off"
+        "eqeqeq": "off",
+        "arrow-body-style": "off"
       }
     },
     {
