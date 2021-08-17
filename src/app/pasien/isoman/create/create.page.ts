@@ -57,19 +57,13 @@ export class CreatePage implements OnInit {
     private isomanService: IsomanService,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({
-      tanggalPemantauan: new FormControl(null, [
-        Validators.required
-      ]),
-      kesehatan: new FormControl(null, [
-        Validators.required
-      ]),
-      pcr: new FormControl(null, [
-        Validators.required
-      ]),
+      tanggalPemantauan: new FormControl(null, [Validators.required]),
+      kesehatan: new FormControl(null, [Validators.required]),
+      pcr: new FormControl(null, [Validators.required]),
       hasilPcr1: new FormControl(null),
       tanggalPcr1: new FormControl(null),
       tanggalKeluarPcr1: new FormControl(null),
@@ -85,13 +79,14 @@ export class CreatePage implements OnInit {
     const id = this.activateRoute.snapshot.params.id;
     this.pasienService.fetch(id).subscribe(
       (pasien) => {
-      console.log(pasien);
-      this.pasien = pasien;
-      this.backUri += this.pasien.id;
+        console.log(pasien);
+        this.pasien = pasien;
+        this.backUri += this.pasien.id;
       },
       (error) => {
         console.log('Error occur while fetching pasien');
-      });
+      }
+    );
     this.pasienService.fetchPe(id).subscribe(
       (resp: any) => {
         this.tanggalWawancara = resp.tanggalWawancara;
@@ -105,13 +100,16 @@ export class CreatePage implements OnInit {
 
         this.alert('Error', 'Internal Server Error');
       }
-    )
+    );
   }
 
   onSave() {
     console.log(this.form);
     if (this.tanggalWawancara == null || this.tanggalWawancara == undefined) {
-      this.alert('Warn', 'Penyelidikan Epidemilogi untuk pasien ini tidak ditemukan');
+      this.alert(
+        'Warn',
+        'Penyelidikan Epidemilogi untuk pasien ini tidak ditemukan'
+      );
       return;
     }
 
@@ -120,54 +118,56 @@ export class CreatePage implements OnInit {
       return;
     }
 
-    this.loadingCtrl.create({
-      message: 'Mohon tunggu'
-    }).then(loading => {
-      loading.present();
-      const postIsoman = {
-        pasienId: this.pasien.id,
-        tanggalPemantauan: this.form.value.tanggalPemantauan,
-        kesehatan: this.form.value.kesehatan,
-        pcr: this.form.value.pcr,
-        hasilPcr1: this.form.value.hasilPcr1,
-        tanggalPcr1: this.form.value.tanggalPcr1,
-        tanggalKeluarPcr1: this.form.value.tanggalKeluarPcr1,
-        hasilPcr2: this.form.value.hasilPcr2,
-        tanggalPcr2: this.form.value.tanggalPcr2,
-        tanggalKeluarPcr2: this.form.value.tanggalkeluarpcr2,
-        status: this.form.value.status,
-        pemantauanTerakhir: this.form.value.pemantauanTerakhir,
-      };
-      this.isomanService.store(postIsoman).subscribe(
-        (resp: any) => {
-          loading.dismiss();
-          this.alert('Info', 'Data sudah disimpan');
-          this.form.reset();
-        },
-        (error) => {
-          loading.dismiss();
-          if (error.status == 400) {
-            const errMessages = error.error.message;
-            let message = ''
-            if (Array.isArray(errMessages)) {
-              for (const error of errMessages) {
-                message += error;
-                message += '<br/>';
+    this.loadingCtrl
+      .create({
+        message: 'Mohon tunggu',
+      })
+      .then((loading) => {
+        loading.present();
+        const postIsoman = {
+          pasienId: this.pasien.id,
+          tanggalPemantauan: this.form.value.tanggalPemantauan,
+          kesehatan: this.form.value.kesehatan,
+          pcr: this.form.value.pcr,
+          hasilPcr1: this.form.value.hasilPcr1,
+          tanggalPcr1: this.form.value.tanggalPcr1,
+          tanggalKeluarPcr1: this.form.value.tanggalKeluarPcr1,
+          hasilPcr2: this.form.value.hasilPcr2,
+          tanggalPcr2: this.form.value.tanggalPcr2,
+          tanggalKeluarPcr2: this.form.value.tanggalkeluarpcr2,
+          status: this.form.value.status,
+          pemantauanTerakhir: this.form.value.pemantauanTerakhir,
+        };
+        this.isomanService.store(postIsoman).subscribe(
+          (resp: any) => {
+            loading.dismiss();
+            this.alert('Info', 'Data sudah disimpan');
+            this.form.reset();
+          },
+          (error) => {
+            loading.dismiss();
+            if (error.status == 400) {
+              const errMessages = error.error.message;
+              let message = '';
+              if (Array.isArray(errMessages)) {
+                for (const errMessage of errMessages) {
+                  message += errMessage;
+                  message += '<br/>';
+                }
+              } else {
+                message = errMessages;
               }
-            } else {
-              message = errMessages;
+
+              this.alert('Warn', message);
             }
 
-            this.alert('Warn', message);
+            if (error.status == 401) {
+              this.alert('Warn', 'Masa sesi habis, silakan login ulang');
+              return;
+            }
           }
-
-          if (error.status == 401) {
-            this.alert('Warn', 'Masa sesi habis, silakan login ulang');
-            return;
-          }
-        }
-      );
-    });
+        );
+      });
   }
 
   alert(inputHeader: string, inputMessage: string) {
@@ -181,5 +181,4 @@ export class CreatePage implements OnInit {
         toast.present();
       });
   }
-
 }
