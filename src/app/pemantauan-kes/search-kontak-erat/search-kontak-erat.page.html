@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-searchbar
+      (ionChange)="doSearchKontakErat($event)"
+      placeholder="Cari Kontak Erat">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let contact of contacts" [routerLink]="['/pemantauan-kes/create', contact.id]">
+      <ion-avatar slot="start" [routerLink]="['./form']" [queryParams]="{id: contact.id}">
+        <img src="assets/male-patient.png" *ngIf="contact.jenisKelamin == 'L'"/>
+        <img src="assets/female-patient.png" *ngIf="contact.jenisKelamin == 'P'"/>
+        <img src="assets/genderless.png" *ngIf="contact.jenisKelamin !== 'P' && contact.jenisKelamin !== 'L'"/>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ contact.nama }}</h2>
+        <small>{{ contact.idKontak }}</small>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

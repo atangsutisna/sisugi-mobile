@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pasien"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Info Pasien</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="git-network-outline" slot="start"></ion-icon>
+            <ion-label>
+              <p>
+                <b>ID Kasus</b><br />
+                {{ pasien.idKasus }}
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="assets/male-patient.png" />
+            </ion-avatar>
+            <ion-label>
+              <p>
+                <b>Nama / NIK</b>
+                <span *ngIf="pasien.nama == null">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </span>
+                <span *ngIf="pasien.nama !== null">
+                  <br />{{ pasien.nama }} <br />{{ pasien.nik }}
+                </span>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="call-outline" slot="start"></ion-icon>
+            <ion-label>
+              <p>
+                <span *ngIf="pasien.nama == null">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </span>
+                <span *ngIf="pasien.nama !== null">
+                  <b>No. Hp</b><br />{{ pasien.nohp }}
+                </span>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-label>
+              <p><b>Email</b><br />-</p>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-icon name="home-outline" slot="start"></ion-icon>
+            <ion-label>
+              <p>
+                <b>Alamat</b><br />
+                <span *ngIf="pasien.nama == null">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </span>
+                <span *ngIf="pasien.nama !== null">
+                  {{ pasien.jalan }}<br />
+                  RT {{ pasien.rt }}/ RW {{ pasien.rt }}<br />
+                  Kecamatan {{ pasien.kecamatanNama }} <br />
+                  Kab / Kota {{ pasien.kabkotaNama }} <br />
+                  Provinsi {{ pasien.provinsiNama }}
+                </span>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item [routerLink]="['/pasien', 'informasi-klinis', pasien.id]">
+            <ion-icon name="arrow-forward-circle-outline" slot="end"></ion-icon>
+            <ion-label>Informasi Klinis</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="arrow-forward-circle-outline" slot="end"></ion-icon>
+            <ion-label>Pemeriksaan Penunjang</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="arrow-forward-circle-outline" slot="end"></ion-icon>
+            <ion-label>Faktor Kontak / Paparan</ion-label>
+          </ion-item>
+          <ion-item [routerLink]="['/pasien', 'kontak-erat', pasien.id]">
+            <ion-icon name="arrow-forward-circle-outline" slot="end"></ion-icon>
+            <ion-label>Kontak Erat</ion-label>
+          </ion-item>
+          <ion-item [routerLink]="['/pasien', 'catatan', pasien.id]">
+            <ion-icon name="arrow-forward-circle-outline" slot="end"></ion-icon>
+            <ion-label>Catatan</ion-label>
+          </ion-item>
+          <ion-item [routerLink]="['/pasien', 'isoman', pasien.id]">
+            <ion-icon name="arrow-forward-circle-outline" slot="end"></ion-icon>
+            <ion-label>Isolasi Mandiri</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="arrow-forward-circle-outline" slot="end"></ion-icon>
+            <ion-label>Vaksinasi</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

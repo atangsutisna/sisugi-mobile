@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-searchbar
+    (ionChange)="doSearchKontakErat($event)"
+    placeholder="Cari Kontak Erat"
+  >
+  </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!---
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" [routerLink]="['create']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+-->
+  <ion-list>
+    <ion-item-group *ngIf="contacts.length == 0">
+      <ion-item *ngFor="let number of [].constructor(7); let i = index;">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h2><ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text></h2>
+          <p><ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text></p>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+    <ion-item *ngFor="let contact of contacts">
+      <ion-avatar slot="start" [routerLink]="['./form']" [queryParams]="{id: contact.id}">
+        <img src="assets/male-patient.png" *ngIf="contact.jenisKelamin == 'L'"/>
+        <img src="assets/female-patient.png" *ngIf="contact.jenisKelamin == 'P'"/>
+        <img src="assets/genderless.png" *ngIf="contact.jenisKelamin !== 'P' && contact.jenisKelamin !== 'L'"/>
+      </ion-avatar>
+      <ion-label [routerLink]="['./form']" [queryParams]="{id: contact.id}">
+        <h2>{{ contact.nama }}</h2>
+        <small>{{ contact.idKontak }}</small>
+      </ion-label>
+      <div class="item-note" slot="end">
+        <ion-button button (click)="openActionSheet(contact.id, contact.nama, contact.idKontak)" fill="clear">
+          <ion-icon  name="ellipsis-vertical-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <!--
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="onPageScroll($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+-->
+</ion-content>

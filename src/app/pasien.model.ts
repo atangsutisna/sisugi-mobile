@@ -1,0 +1,34 @@
+export class Pasien {
+  id: string;
+  idKasus: string;
+  puskesmasId: string;
+  puskesmasNama: string;
+  nik: string;
+  nama: string;
+  vaksinasi: boolean;
+  tglDosis1: Date;
+  tglDosis2: Date;
+  tanggalLahir: Date;
+  jenisKelamin: string;
+  kewarganegaraan: string;
+  pekerjaan: string;
+  ketPekerjaanLainnya: string;
+  nohp: string;
+  jalan: string;
+  rt: string;
+  rw: string;
+  kelurahanId: string;
+  kelurahanNama: string;
+  kecamatanId: string;
+  kecamatanNama: string;
+  kabkotaId: string;
+  kabkotaNama: string;
+  provinsiId: string;
+  provinsiNama: string;
+  latitude: string;
+  longitude: string;
+  statusEpidemiologi: string;
+  statusAkhir: string;
+  updatedAt: Date;
+  createdAt: Date;
+}

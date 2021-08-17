@@ -1,0 +1,241 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Pemantauan KE</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onSave()">
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">ID Kontak</ion-label>
+            <ion-input name="idkontak" formControlName="idKontak" readonly></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Nama</ion-label>
+            <ion-input name="nama" formControlName="nama" readonly></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Tgl. Kontak</ion-label>
+            <ion-datetime name="idkontak" formControlName="tanggalKontak"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Tgl. Pemantauan</ion-label>
+            <ion-datetime name="idkontak" formControlName="tanggalPemantauan"></ion-datetime>
+          </ion-item>
+          <ion-radio-group formControlName="kesehatan">
+            <ion-list-header>
+              <ion-label>Cek Kesehatan</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Tanpa Gejala</ion-label>
+              <ion-radio slot="start" value="Tanpa Gejala"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Demam dan Gejala ISPA</ion-label>
+              <ion-radio slot="start" value="Demam dan gejala ISPA"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Demam</ion-label>
+              <ion-radio slot="start" value="Demam"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Rujuk RS</ion-label>
+              <ion-radio slot="start" value="Rujuk RS"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Meninggal</ion-label>
+              <ion-radio slot="start" value="Meninggal"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+          <ion-radio-group formControlName="pemeriksaanRdtAntigen">
+            <ion-list-header>
+              <ion-label>RDT Antigen</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Ya</ion-label>
+              <ion-radio slot="start" value="1"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Tidak</ion-label>
+              <ion-radio slot="start" value="0"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+          <ion-item-group *ngIf="form.get('pemeriksaanRdtAntigen').value == '1'">
+            <ion-item-divider>
+              <ion-label>RDT-ANTIGEN Pertama</ion-label>
+            </ion-item-divider>
+            <ion-item>
+              <ion-label position="floating">Tgl. Pemeriksaan</ion-label>
+              <ion-datetime formControlName="tanggalPemeriksaanRdtAntigen"></ion-datetime>
+            </ion-item>
+            <ion-radio-group formControlName="hasilPemeriksaanRdtAntigen">
+              <ion-list-header>
+                <ion-label>Hsl Pemeriksaan</ion-label>
+              </ion-list-header>
+              <ion-item>
+                <ion-label>Reaktif</ion-label>
+                <ion-radio slot="start" value="REAKTIF"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Non-Reaktif</ion-label>
+                <ion-radio slot="start" value="NON-REAKTIF"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+            <ion-item-divider>
+              <ion-label>RDT-ANTIGEN Kedua</ion-label>
+            </ion-item-divider>
+            <ion-item>
+              <ion-label position="floating">Tgl. Pemeriksaan</ion-label>
+              <ion-datetime formControlName="tanggalPemeriksaanRdtAntigen2"></ion-datetime>
+            </ion-item>
+            <ion-radio-group formControlName="hasilPemeriksaanRdtAntigen2">
+              <ion-list-header>
+                <ion-label>Hsl Pemeriksaan</ion-label>
+              </ion-list-header>
+              <ion-item>
+                <ion-label>Reaktif</ion-label>
+                <ion-radio slot="start" value="REAKTIF"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Non-Reaktif</ion-label>
+                <ion-radio slot="start" value="NON-REAKTIF"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+          </ion-item-group>
+
+          <ion-radio-group formControlName="pcr">
+            <ion-list-header>
+              <ion-label>RT PCR</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Ya</ion-label>
+              <ion-radio slot="start" value="1"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Tidak</ion-label>
+              <ion-radio slot="start" value="0"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+          <ion-item-group *ngIf="form.get('pcr').value == '1'">
+            <ion-item-divider>
+              <ion-label>RT-PCR 1</ion-label>
+            </ion-item-divider>
+            <ion-item>
+              <ion-label position="floating">Tgl. Pengambilan</ion-label>
+              <ion-datetime formControlName="tanggalPcr1"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Tgl. Keluar</ion-label>
+              <ion-datetime formControlName="tanggalKeluarPcr1"></ion-datetime>
+            </ion-item>
+            <ion-radio-group formControlName="hasilPcr1">
+              <ion-list-header>
+                <ion-label>Hsl Pemeriksaan</ion-label>
+              </ion-list-header>
+              <ion-item>
+                <ion-label>Positif</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Negatif</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <!--/ end of rt-pcr 1 -->
+            <ion-item-divider>
+              <ion-label>RT-PCR 2</ion-label>
+            </ion-item-divider>
+            <ion-item>
+              <ion-label position="floating">Tgl. Pengambilan</ion-label>
+              <ion-datetime formControlName="tanggalPcr2"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Tgl. Keluar</ion-label>
+              <ion-datetime formControlName="tanggalKeluarPcr2"></ion-datetime>
+            </ion-item>
+            <ion-radio-group formControlName="hasilPcr2">
+              <ion-list-header>
+                <ion-label>Hsl Pemeriksaan</ion-label>
+              </ion-list-header>
+              <ion-item>
+                <ion-label>Positif</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Negatif</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <!--/ end of rt-pcr 2 -->
+          </ion-item-group>
+
+          <ion-radio-group formControlName="status">
+            <ion-list-header>
+              <ion-label>Status Kesehatan</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Sehat</ion-label>
+              <ion-radio slot="start" value="Sehat"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Suspek</ion-label>
+              <ion-radio slot="start" value="Suspek"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+          <ion-item>
+            <ion-label position="stack">Pemantauan Terakhir</ion-label>
+            <ion-checkbox slot="start" formControlName="pemantauanTerakhir"></ion-checkbox>
+          </ion-item>
+
+          <ion-radio-group
+            formControlName="pemantauanTerakhir"
+            *ngIf="form.get('pemantauanTerakhir').value">
+            <ion-list-header>
+              <ion-label>Status Akhir</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Discarded</ion-label>
+              <ion-radio slot="start" value="Discarded"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Mangkir</ion-label>
+              <ion-radio slot="start" value="Mangkir"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Probable</ion-label>
+              <ion-radio slot="start" value="Probable"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Konfirmasi</ion-label>
+              <ion-radio slot="start" value="Konfirmasi"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button color="primary" expand="block" (click)="onSave()">
+            Simpan
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

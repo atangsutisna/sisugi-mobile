@@ -1,0 +1,196 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pasien"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pasien Baru</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onSave()">
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid style="margin-top: 15px">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">NIK</ion-label>
+            <ion-input name="nik" formControlName="nik"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nama Lengkap</ion-label>
+            <ion-input name="fullname" formControlName="nama"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Tgl. Lahir</ion-label>
+            <ion-datetime
+              formControlName="tanggalLahir"
+              displayFormat="MM/DD/YYYY"
+            ></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-radio-group formControlName="jenisKelamin">
+            <ion-list-header>
+              <ion-label>Jenis Kelamin</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Laki-laki</ion-label>
+              <ion-radio slot="start" value="Laki-laki"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Perempuan</ion-label>
+              <ion-radio slot="start" value="Perempuan"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Pekerjaan</ion-label>
+            <ion-select name="pekerjaan" formControlName="pekerjaan">
+              <ion-select-option
+                *ngFor="let pekerjaan of listPekerjaan"
+                value="{{pekerjaan.value}}"
+              >
+                {{ pekerjaan.displayValue }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">No. Handphone</ion-label>
+            <ion-input name="nohp" formControlName="nohp"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <!-- start of addres group -->
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Alamat</ion-label>
+            <ion-textarea name="jalan" formControlName="jalan" placeholder="Nama jalan"></ion-textarea>
+          </ion-item>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">RW</ion-label>
+                <ion-input name="rt" formControlName="rt" placeholder="RT"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">RW</ion-label>
+                <ion-input name="rw" formControlName="rw" placeholder="RW"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <!--/end of address group -->
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Provinsi</ion-label>
+            <ion-select formControlName="provinsiId">
+              <ion-select-option
+                *ngFor="let prov of listProvinsi"
+                value="{{prov.id}}"
+              >
+                {{ prov.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Kab/Kota</ion-label>
+            <ion-select formControlName="kabkotaId">
+              <ion-select-option
+                *ngFor="let kabkota of listKabkota"
+                value="{{kabkota.id}}"
+              >
+                {{ kabkota.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Kecamatan</ion-label>
+            <ion-select formControlName="kecamatanId">
+              <ion-select-option
+                *ngFor="let kec of listKecamatan"
+                value="{{kec.id}}"
+              >
+                {{ kec.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Kelurahan</ion-label>
+            <ion-select formControlName="kelurahanId">
+              <ion-select-option
+                *ngFor="let kel of listKelurahan"
+                value="{{kel.id}}"
+              >
+                {{ kel.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!---
+      <ion-row>
+        <ion-col>
+          <ion-radio-group>
+            <ion-list-header>Vaksinasi</ion-list-header>
+          </ion-radio-group>
+          <ion-item>
+            <ion-label>Ya</ion-label>
+            <ion-radio slot="start" value="1"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Tidak</ion-label>
+            <ion-radio slot="start" value="0"></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    -->
+      <ion-row>
+        <ion-col>
+          <ion-button color="primary" expand="full" (click)="onSave()">
+            Simpan
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-list> </ion-list>
+  </form>
+</ion-content>

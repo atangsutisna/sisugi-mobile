@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pasien"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Catatan Pasien</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onSave()" disabled="true">
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>
+              <p>
+                <b>ID Kasus: </b><br/>
+                {{ this.form.value.idkasus }}
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-radio-group formControlName="statusEpidemiologi">
+            <ion-list-header>
+              Status Epidemiologi
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Probable</ion-label>
+              <ion-radio slot="start" value="Probable"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Suspek</ion-label>
+              <ion-radio slot="start" value="Suspek"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Konfirmasi Kontak</ion-label>
+              <ion-radio slot="start" value="Konfirmasi Kontak"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Konfirmasi Perjalanan</ion-label>
+              <ion-radio slot="start" value="Konfirmasi Perjalanan"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Konfirmasi Tanpa Riwayat</ion-label>
+              <ion-radio slot="start" value="Konfirmasi Tanpa Riwayat"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button color="primary" expand="block" (click)="onSave()" disabled="true">
+            Simpan
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
