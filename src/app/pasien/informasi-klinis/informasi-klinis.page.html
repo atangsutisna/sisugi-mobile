@@ -5,14 +5,14 @@
     </ion-buttons>
     <ion-title>Informasi Klinis</ion-title>
     <ion-buttons slot="end">
-      <ion-button disabled="true">
+      <ion-button disabled="true" (click)="onSave()">
         <ion-icon name="save-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form>
+  <form [formGroup]="form">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -42,7 +42,7 @@
             </ion-label>
           </ion-item>
 
-          <ion-radio-group>
+          <ion-radio-group formControlName="terdapatGejala">
             <ion-list-header> Apakah terdapat gejala? </ion-list-header>
             <ion-item>
               <ion-label>Ya</ion-label>
@@ -54,131 +54,302 @@
             </ion-item>
           </ion-radio-group>
 
-          <ion-radio-group>
-            <ion-list-header> Diabetes? </ion-list-header>
+          <ion-item-group *ngIf="form.get('terdapatGejala').value == '1'">
             <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
+              <ion-label position="floating">Tanggal Gejala</ion-label>
+              <ion-datetime formControlName="tanggalGejala"></ion-datetime>
             </ion-item>
+            <ion-radio-group formControlName="demam">
+              <ion-list-header> Demam/Riwayat Demam? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="batuk">
+              <ion-list-header> Batuk? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="pilek">
+              <ion-list-header> Pilek? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="sakitTenggorokan">
+              <ion-list-header> Sakit Tenggorokan? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="sesakNapas">
+              <ion-list-header> Sesak Napas? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="sakitKepala">
+              <ion-list-header> Sakit Kepala? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="lemas">
+              <ion-list-header> Lemas (malaise)? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="nyeriOtot">
+              <ion-list-header> Nyeri Otot? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="mualMuntah">
+              <ion-list-header> Mual, Muntah? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="nyeriAbdomen">
+              <ion-list-header> Nyeri Abdomen? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="diare">
+              <ion-list-header> Diare? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="gangguanMenghidu">
+              <ion-list-header> Gangguan Menghidu? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="gangguanMengecap">
+              <ion-list-header> Gangguan Mengecap? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="gejalaLainnya">
+              <ion-list-header> Lainnya? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
             <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
+              <ion-label position="floating">Keterangan Lainnya</ion-label>
+              <ion-input formControlName="ketGejalaLainnya"></ion-input>
             </ion-item>
-          </ion-radio-group>
+          </ion-item-group>
 
-          <ion-radio-group>
-            <ion-list-header> Penyakit Jantung? </ion-list-header>
-            <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+          <ion-item-group>
+            <ion-item-divider>
+              <ion-label>Penyakit Penyerta</ion-label>
+            </ion-item-divider>
 
-          <ion-radio-group>
-            <ion-list-header> Hipertensi? </ion-list-header>
-            <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+            <ion-radio-group formControlName="diabetes">
+              <ion-list-header> Diabetes? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
 
-          <ion-radio-group>
-            <ion-list-header> Keganasan? </ion-list-header>
-            <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+            <ion-radio-group formControlName="penyakitJantung">
+              <ion-list-header> Penyakit Jantung? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
 
-          <ion-radio-group>
-            <ion-list-header> Gangguan Immunologi? </ion-list-header>
-            <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+            <ion-radio-group formControlName="hipertensi">
+              <ion-list-header> Hipertensi? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
 
-          <ion-radio-group>
-            <ion-list-header> Gagal Ginjal Kronis? </ion-list-header>
-            <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+            <ion-radio-group formControlName="keganasan">
+              <ion-list-header> Keganasan? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
 
-          <ion-radio-group>
-            <ion-list-header> Gagal Hati Kronis? </ion-list-header>
-            <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+            <ion-radio-group formControlName="gangguanImmunologi">
+              <ion-list-header> Gangguan Immunologi? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
 
-          <ion-radio-group>
-            <ion-list-header>PPOK? </ion-list-header>
-            <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+            <ion-radio-group formControlName="gagalGinjal">
+              <ion-list-header> Gagal Ginjal Kronis? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
 
-          <ion-radio-group>
-            <ion-list-header>Hamil? </ion-list-header>
-            <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
+            <ion-radio-group formControlName="gagalHati">
+              <ion-list-header> Gagal Hati Kronis? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
 
-          <ion-radio-group>
-            <ion-list-header>Lainnya? </ion-list-header>
-            <ion-item>
-              <ion-label>Ya</ion-label>
-              <ion-radio slot="start" value="1"></ion-radio>
-            </ion-item>
-            <ion-item>
-              <ion-label>Tidak</ion-label>
-              <ion-radio slot="start" value="0"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
-          <ion-item>
-            <ion-label position="floating">Keterangan Lainnya</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
+            <ion-radio-group formControlName="ppok">
+              <ion-list-header>PPOK? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
 
-          <ion-radio-group>
+            <ion-radio-group formControlName="hamil">
+              <ion-list-header>Hamil? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+            <ion-radio-group formControlName="komorbidLainnya">
+              <ion-list-header>Lainnya? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-item *ngIf="form.get('komorbidLainnya').value == '1'">
+              <ion-label position="floating">Keterangan Lainnya</ion-label>
+              <ion-input formControlName="ketKomorbidLainnya"></ion-input>
+            </ion-item>
+          </ion-item-group>
+
+          <ion-radio-group formControlName="dirawatdirs">
             <ion-list-header>Apakah dirawat di Rumah Sakit? </ion-list-header>
             <ion-item>
               <ion-label>Ya</ion-label>
@@ -190,7 +361,51 @@
             </ion-item>
           </ion-radio-group>
 
-          <ion-radio-group>
+          <ion-item-group *ngIf="form.get('dirawatdirs').value == '1'">
+            <ion-item>
+              <ion-label position="floating">Nama RS Terakhir</ion-label>
+              <ion-input formControlName="namars"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Tanggal Masuk RS</ion-label>
+              <ion-datetime formControlName="tanggalMasukRs"></ion-datetime>
+            </ion-item>
+            <ion-radio-group formControlName="icu">
+              <ion-list-header>Dirawat di ICU? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="inturbasi">
+              <ion-list-header>Inturbasi? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+            <ion-radio-group formControlName="emco">
+              <ion-list-header>Penggunaan EMCO? </ion-list-header>
+              <ion-item>
+                <ion-label>Ya</ion-label>
+                <ion-radio slot="start" value="1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Tidak</ion-label>
+                <ion-radio slot="start" value="0"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-item-group>
+
+          <ion-radio-group formControlName="statusTerakhir">
             <ion-list-header>Status Saat Wawancara? </ion-list-header>
             <ion-item>
               <ion-label>Sembuh</ion-label>
@@ -206,7 +421,7 @@
             </ion-item>
           </ion-radio-group>
 
-          <ion-radio-group>
+          <ion-radio-group formControlName="pneumonia">
             <ion-list-header
               >Pneumonia (klinis atau radiologi)?
             </ion-list-header>
@@ -224,7 +439,7 @@
             </ion-item>
           </ion-radio-group>
 
-          <ion-radio-group>
+          <ion-radio-group formControlName="ards">
             <ion-list-header
               >ARDS (Acute Respiratory Distress Syndrome)?
             </ion-list-header>
@@ -242,7 +457,7 @@
             </ion-item>
           </ion-radio-group>
 
-          <ion-radio-group>
+          <ion-radio-group formControlName="lainnya">
             <ion-list-header>Lainnya? </ion-list-header>
             <ion-item>
               <ion-label>Ya</ion-label>
@@ -259,13 +474,18 @@
           </ion-radio-group>
           <ion-item>
             <ion-label position="floating">Keterangan Lainnya</ion-label>
-            <ion-input></ion-input>
+            <ion-input formControlName="ketLainnya"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button color="primary" expand="block" disabled="true">
+          <ion-button
+            color="primary"
+            expand="block"
+            disabled="true"
+            (click)="onSave()"
+          >
             Simpan
           </ion-button>
         </ion-col>
