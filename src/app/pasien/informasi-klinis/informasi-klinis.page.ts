@@ -3,6 +3,8 @@ import { PasienService } from 'src/app/pasien.service';
 import { Pasien } from 'src/app/pasien.model';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { InformasiKlinisService } from './informasi-klinis.service';
 
 @Component({
   selector: 'app-informasi-klinis',
@@ -47,7 +49,10 @@ export class InformasiKlinisPage implements OnInit {
   form: FormGroup;
   constructor(
     private pasienService: PasienService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private informasiKlinisService: InformasiKlinisService,
+    private alertCtrl: AlertController,
+    private loadinCtrl: LoadingController
   ) {}
 
   ngOnInit() {
@@ -141,5 +146,88 @@ export class InformasiKlinisPage implements OnInit {
 
   onSave() {
     console.log('store on database');
+    if (this.form.invalid) {
+      this.alert('Warn', 'Mohon dilengkapi');
+      return;
+    }
+
+    this.loadinCtrl
+      .create({
+        message: 'Mohon tunggu',
+      })
+      .then((loading) => {
+        loading.present();
+        const postInformasKlinis = {
+          terdapatGejala: this.form.value.terdapatGejala,
+          tanggalGejala: this.form.value.tanggalGejala,
+          demam: this.form.value.demam,
+          batuk: this.form.value.batuk,
+          pilek: this.form.value.pilek,
+          sakitTenggorokan: this.form.value.sakitTenggorokan,
+          sesakNapas: this.form.value.sesakNapas,
+          sakitKepala: this.form.value.sakitKepala,
+          lemas: this.form.value.lemas,
+          nyeriOtot: this.form.value.nyeriOtot,
+          mualMuntah: this.form.value.mualMuntah,
+          nyeriAbdomen: this.form.value.nyeriAbdomen,
+          diare: this.form.value.diare,
+          gangguanMenghidu: this.form.value.gangguanMenghidu,
+          gangguanMengecap: this.form.value.gangguanMengecap,
+          gejalaLainnya: this.form.value.gejalaLainnya,
+          ketGejalaLainnya: this.form.value.ketGejalaLainnya,
+          hamil: this.form.value.hamil,
+          diabetes: this.form.value.diabetes,
+          penyakitJantung: this.form.value.penyakitJantung,
+          hipertensi: this.form.value.hipertensi,
+          keganasan: this.form.value.keganasan,
+          gangguanImmunologi: this.form.value.gangguanImmunologi,
+          gagalGinjal: this.form.value.gagalGinjal,
+          gagalHati: this.form.value.gagalHati,
+          ppok: this.form.value.ppok,
+          komorbidLainnya: this.form.value.komorbidLainnya,
+          ketKomorbidLainnya: this.form.value.ketKomorbidLainnya,
+          dirawatdirs: this.form.value.dirawatdirs,
+          namars: this.form.value.namars,
+          tanggalMasukRs: this.form.value.tanggalMasukRs,
+          icu: this.form.value.icu,
+          inturbasi: this.form.value.inturbasi,
+          emco: this.form.value.emco,
+          statusTerakhir: this.form.value.statusTerakhir,
+          pneumonia: this.form.value.pneumonia,
+          ards: this.form.value.ards,
+          lainnya: this.form.value.lainnya,
+          ketLainnya: this.form.value.ketLainnya,
+        };
+
+        this.informasiKlinisService
+          .store(this.pasien.id, postInformasKlinis)
+          .subscribe(
+            (resp: any) => {
+              loading.dismiss();
+              this.alert('Info', 'Data sudah disimpan');
+            },
+            (error) => {
+              if (error.status == 401) {
+                this.alert('Warn', 'Masa sesi habis, silakan login ulang');
+              }
+
+              if (error.status == 500) {
+                this.alert('Error', 'Internal Server Error');
+              }
+            }
+          );
+      });
+  }
+
+  alert(inputHeader: string, inputMessage: string) {
+    this.alertCtrl
+      .create({
+        header: inputHeader,
+        message: inputMessage,
+        buttons: ['Ok'],
+      })
+      .then((toast) => {
+        toast.present();
+      });
   }
 }
