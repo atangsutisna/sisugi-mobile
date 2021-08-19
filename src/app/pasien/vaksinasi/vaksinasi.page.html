@@ -1,9 +1,56 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>vaksinasi</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pasien"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Vaksinasi</ion-title>
+    <ion-buttons slot="end">
+      <ion-button disabled="true">
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-radio-group>
+          <ion-list-header>
+            <ion-label>Vaksinasi</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Ya</ion-label>
+            <ion-radio slot="start" value="1"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Tidak</ion-label>
+            <ion-radio slot="start" value="0"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
 
+        <ion-item>
+          <ion-label position="floating">Tgl. Dosis Pertama</ion-label>
+          <ion-datetime></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Tgl. Dosis Kedua</ion-label>
+          <ion-datetime></ion-datetime>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button
+        color="primary"
+        expand="block"
+        disabled="true">
+        Simpan
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 </ion-content>
