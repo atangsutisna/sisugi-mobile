@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Pasien } from 'src/app/pasien.model';
 import { PasienService } from 'src/app/pasien.service';
@@ -52,6 +52,38 @@ export class FaktorKontakPaparanPage implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
+      keluarNegeri: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      transmisiLokal: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      kunjunganFaskes: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      pasarHewan: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      kontakSuspek: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      kontakKonfirmasi: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      ispaBerat: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      petugasKesehatan: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      apd: new FormControl(null),
+      gown: new FormControl(null),
+      masker: new FormControl(null),
+      sarungTangan: new FormControl(null),
+      maskerniosn: new FormControl(null),
+      ffp3: new FormControl(null),
+      goggle: new FormControl(null),
+      tidakMemakaiApd: new FormControl(null)
     });
   }
 

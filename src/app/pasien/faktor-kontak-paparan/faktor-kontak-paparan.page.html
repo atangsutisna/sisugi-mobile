@@ -46,7 +46,7 @@
             Dalam 14 hari sebelum sakit, apakah memiliki riwayat perjalanan ke luar negeri?
           </ion-label>
         </ion-item>
-        <ion-radio-group>
+        <ion-radio-group formControlName="keluarNegeri">
           <ion-item>
             <ion-label>Ya</ion-label>
             <ion-radio slot="start" value="1"></ion-radio>
@@ -65,7 +65,7 @@
             Dalam 14 hari sebelum sakit, apakah memiliki riwayat perjalanan ke transmisi lokal?
           </ion-label>
         </ion-item>
-        <ion-radio-group>
+        <ion-radio-group formControlName="transmisiLokal">
           <ion-item>
             <ion-label>Ya</ion-label>
             <ion-radio slot="start" value="1"></ion-radio>
@@ -84,7 +84,7 @@
             Dalam 14 hari sebelum sakit, apakah memiliki riwayat perjalanan berkunjung ke fasilitas kesehatan, baik sebagai pasien, pekerja, atau berkunjung?
           </ion-label>
         </ion-item>
-        <ion-radio-group>
+        <ion-radio-group formControlName="kunjunganFaskes">
           <ion-item>
             <ion-label>Ya</ion-label>
             <ion-radio slot="start" value="1"></ion-radio>
@@ -103,7 +103,7 @@
             Dalam 14 hari sebelum sakit, apakah mengunjungi pasar hewan?
           </ion-label>
         </ion-item>
-        <ion-radio-group>
+        <ion-radio-group formControlName="pasarHewan">
           <ion-item>
             <ion-label>Ya</ion-label>
             <ion-radio slot="start" value="1"></ion-radio>
@@ -122,7 +122,7 @@
             Dalam 14 hari sebelum sakit, apakah memiliki kontak erat dengan kasus suspek COVID-19?
           </ion-label>
         </ion-item>
-        <ion-radio-group>
+        <ion-radio-group formControlName="kontakSuspek">
           <ion-item>
             <ion-label>Ya</ion-label>
             <ion-radio slot="start" value="1"></ion-radio>
@@ -141,7 +141,7 @@
             Dalam 14 hari sebelum sakit, apakah memiliki kontak erat dengan kasus konfirmasi COVID-19?
           </ion-label>
         </ion-item>
-        <ion-radio-group>
+        <ion-radio-group formControlName="kontakKonfirmasi">
           <ion-item>
             <ion-label>Ya</ion-label>
             <ion-radio slot="start" value="1"></ion-radio>
@@ -160,7 +160,7 @@
             Apakah termasuk cluster ISPA berat (demam dan pneumonia yang membutuhkan perawatan RS) yang tidak diketahui penyebabnya?
           </ion-label>
         </ion-item>
-        <ion-radio-group>
+        <ion-radio-group formControlName="ispaBerat">
           <ion-item>
             <ion-label>Ya</ion-label>
             <ion-radio slot="start" value="1"></ion-radio>
@@ -179,7 +179,7 @@
             Apakah seorang petugas kesehatan?
           </ion-label>
         </ion-item>
-        <ion-radio-group>
+        <ion-radio-group formControlName="petugasKesehatan">
           <ion-item>
             <ion-label>Ya</ion-label>
             <ion-radio slot="start" value="1"></ion-radio>
@@ -200,31 +200,31 @@
         </ion-item>
         <ion-item>
           <ion-label position="stack">Gown</ion-label>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="gown"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label position="stack">Masker Medis</ion-label>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="masker"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label position="stack">Sarung Tangan</ion-label>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="sarungTangan"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label position="stack">Masker NIOSH-N95, AN EU Standar FFPA</ion-label>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="maskerniosn"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label position="stack">FFP3</ion-label>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="ffp3"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label position="stack">Kacamate Pelindung (Goggle)</ion-label>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="goggle"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label position="stack">Tidak Memakai APD</ion-label>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="tidakMemakaiApd"></ion-checkbox>
         </ion-item>
       </ion-col>
     </ion-row>
