@@ -43,6 +43,10 @@ const routes: Routes = [
     path: 'informasi-klinis/:id',
     loadChildren: () => import('./informasi-klinis/informasi-klinis.module').then( m => m.InformasiKlinisPageModule)
   },
+  {
+    path: 'informasi-pemeriksaan-penunjang/:id',
+    loadChildren: () => import('./informasi-pemeriksaan-penunjang/informasi-pemeriksaan-penunjang.module').then( m => m.InformasiPemeriksaanPenunjangPageModule)
+  },
 ];
 
 @NgModule({
