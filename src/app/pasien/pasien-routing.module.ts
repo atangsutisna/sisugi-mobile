@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'faktor-kontak-paparan/:id',
     loadChildren: () => import('./faktor-kontak-paparan/faktor-kontak-paparan.module').then( m => m.FaktorKontakPaparanPageModule)
   },
+  {
+    path: 'vaksinasi/:id',
+    loadChildren: () => import('./vaksinasi/vaksinasi.module').then( m => m.VaksinasiPageModule)
+  },
 ];
 
 @NgModule({
