@@ -47,6 +47,10 @@ const routes: Routes = [
     path: 'informasi-pemeriksaan-penunjang/:id',
     loadChildren: () => import('./informasi-pemeriksaan-penunjang/informasi-pemeriksaan-penunjang.module').then( m => m.InformasiPemeriksaanPenunjangPageModule)
   },
+  {
+    path: 'faktor-kontak-paparan/:id',
+    loadChildren: () => import('./faktor-kontak-paparan/faktor-kontak-paparan.module').then( m => m.FaktorKontakPaparanPageModule)
+  },
 ];
 
 @NgModule({
