@@ -62,4 +62,7 @@ export class FaktorKontakPaparanPage implements OnInit {
     });
   }
 
+  onSave() {
+    console.log('save to database');
+  }
 }
