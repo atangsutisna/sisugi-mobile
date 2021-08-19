@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Pasien } from 'src/app/pasien.model';
@@ -57,6 +57,33 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
+      pemeriksaanRdtAntigen: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      tanggalPemeriksaanRdtAntigen: new FormControl(null),
+      hasilPemeriksaanRdtAntigen: new FormControl(null),
+      pemeriksaanRdtAntigen2: new FormControl(null),
+      tanggalPemeriksaanRdtAntigen2: new FormControl(null),
+      hasilPemeriksaanRdtAntigen2: new FormControl(null),
+      spesimen: new FormControl(null, {
+        validators: [Validators.required]
+      }),
+      jenisSpesimen1: new FormControl(null),
+      swabNasofaring1: new FormControl(null),
+      swabOrofaring1: new FormControl(null),
+      sputum1: new FormControl(null),
+      serum1: new FormControl(null),
+      tanggalPengambilan1: new FormControl(null),
+      tanggalPengambilanKeluar1: new FormControl(null),
+      hasilPemeriksaanSpesimen1: new FormControl(null),
+      jenisSpesimen2: new FormControl(null),
+      swabNasofaring2: new FormControl(null),
+      swabOrofaring2: new FormControl(null),
+      sputum2: new FormControl(null),
+      serum2: new FormControl(null),
+      tanggalPengambilan2: new FormControl(null),
+      tanggalPengambilanKeluar2: new FormControl(null),
+      hasilPemeriksaanSpesimen2: new FormControl(null)
     });
   }
 
@@ -65,6 +92,10 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
     this.pasienService.fetch(id).subscribe((pasien) => {
       this.pasien = pasien;
     });
+  }
+
+  onSave() {
+    console.log('save to database');
   }
 
 }

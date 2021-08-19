@@ -42,8 +42,7 @@
               </p>
             </ion-label>
           </ion-item>
-
-          <ion-radio-group>
+          <ion-radio-group formControlName="pemeriksaanRdtAntigen">
             <ion-list-header> Apakah dilakukan pemeriksaan RDT-Antigen? </ion-list-header>
             <ion-item>
               <ion-label>Ya</ion-label>
@@ -54,15 +53,15 @@
               <ion-radio slot="start" value="0"></ion-radio>
             </ion-item>
           </ion-radio-group>
-          <ion-item-group>
+          <ion-item-group *ngIf="form.get('pemeriksaanRdtAntigen').value == '1'">
             <ion-item-divider>
               <ion-label>RDT-Antigen Pertama</ion-label>
             </ion-item-divider>
             <ion-item>
               <ion-label position="floating">Tanggal Pemeriksaan</ion-label>
-              <ion-datetime></ion-datetime>
+              <ion-datetime formControlName="tanggalPemeriksaanRdtAntigen"></ion-datetime>
             </ion-item>
-            <ion-radio-group>
+            <ion-radio-group formControlName="hasilPemeriksaanRdtAntigen">
               <ion-list-header>Hasil Pemeriksaan</ion-list-header>
               <ion-item>
                 <ion-label>Reaktif</ion-label>
@@ -73,16 +72,14 @@
                 <ion-radio slot="start" value="NON-REAKTIF"></ion-radio>
               </ion-item>
             </ion-radio-group>
-          </ion-item-group>
-          <ion-item-group>
             <ion-item-divider>
               <ion-label>RDT-Antigen Kedua</ion-label>
             </ion-item-divider>
             <ion-item>
               <ion-label position="floating">Tanggal Pemeriksaan</ion-label>
-              <ion-datetime></ion-datetime>
+              <ion-datetime formControlName="tanggalPemeriksaanRdtAntigen2"></ion-datetime>
             </ion-item>
-            <ion-radio-group>
+            <ion-radio-group formControlName="hasilPemeriksaanRdtAntigen2">
               <ion-list-header>Hasil Pemeriksaan</ion-list-header>
               <ion-item>
                 <ion-label>Reaktif</ion-label>
@@ -95,7 +92,7 @@
             </ion-radio-group>
           </ion-item-group>
           <!--start rt-pcr-->
-          <ion-radio-group>
+          <ion-radio-group formControlName="spesimen">
             <ion-list-header> Apakah dilakukakan pengambilan Spesimen RT-PCR? </ion-list-header>
             <ion-item>
               <ion-label>Ya</ion-label>
@@ -106,36 +103,36 @@
               <ion-radio slot="start" value="0"></ion-radio>
             </ion-item>
           </ion-radio-group>
-          <ion-item-group>
+          <ion-item-group *ngIf="form.get('spesimen').value == '1'">
             <ion-item-divider>
               <ion-label>Spesimen Pertama</ion-label>
             </ion-item-divider>
             <ion-list-header>Jenis</ion-list-header>
             <ion-item>
               <ion-label position="stack">Swab Nasofaring</ion-label>
-              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-checkbox slot="start" formControlName="swabNasofaring1"></ion-checkbox>
             </ion-item>
             <ion-item>
               <ion-label position="stack">Swab Orofaring</ion-label>
-              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-checkbox slot="start" formControlName="swabOrofaring1"></ion-checkbox>
             </ion-item>
             <ion-item>
               <ion-label position="stack">Sputum</ion-label>
-              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-checkbox slot="start" formControlName="sputum1"></ion-checkbox>
             </ion-item>
             <ion-item>
               <ion-label position="stack">Serum</ion-label>
-              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-checkbox slot="start" formControlName="serum1"></ion-checkbox>
             </ion-item>
             <ion-item>
                 <ion-label position="floating">Tanggal Pengambilan</ion-label>
-                <ion-datetime></ion-datetime>
+                <ion-datetime formControlName="tanggalPengambilan1"></ion-datetime>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Tanggal Keluar</ion-label>
-              <ion-datetime></ion-datetime>
+              <ion-datetime formControlName="tanggalPengambilanKeluar1"></ion-datetime>
             </ion-item>
-            <ion-radio-group>
+            <ion-radio-group formControlName="hasilPemeriksaanSpesimen1">
               <ion-list-header>
                 <ion-label>Hasil Pemeriksaan</ion-label>
               </ion-list-header>
@@ -156,37 +153,36 @@
                 <ion-radio slot="start" value="Dalam Proses"></ion-radio>
               </ion-item>
             </ion-radio-group>
-          </ion-item-group> <!--/ end of spesimen pertama -->
-          <ion-item-group>
+            <!--/ end of spesimen pertama -->
             <ion-item-divider>
               <ion-label>Spesimen Kedua</ion-label>
             </ion-item-divider>
             <ion-list-header>Jenis</ion-list-header>
             <ion-item>
               <ion-label position="stack">Swab Nasofaring</ion-label>
-              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-checkbox slot="start" formControlName="swabNasofaring2"></ion-checkbox>
             </ion-item>
             <ion-item>
               <ion-label position="stack">Swab Orofaring</ion-label>
-              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-checkbox slot="start" formControlName="swabOrofaring2"></ion-checkbox>
             </ion-item>
             <ion-item>
               <ion-label position="stack">Sputum</ion-label>
-              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-checkbox slot="start" formControlName="sputum2"></ion-checkbox>
             </ion-item>
             <ion-item>
               <ion-label position="stack">Serum</ion-label>
-              <ion-checkbox slot="start"></ion-checkbox>
+              <ion-checkbox slot="start" formControlName="serum2"></ion-checkbox>
             </ion-item>
             <ion-item>
                 <ion-label position="floating">Tanggal Pengambilan</ion-label>
-                <ion-datetime></ion-datetime>
+                <ion-datetime formControlName="tanggalPengambilan2"></ion-datetime>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Tanggal Keluar</ion-label>
-              <ion-datetime></ion-datetime>
+              <ion-datetime formControlName="tanggalPengambilanKeluar2"></ion-datetime>
             </ion-item>
-            <ion-radio-group>
+            <ion-radio-group formControlName="hasilPemeriksaanSpesimen2">
               <ion-list-header>
                 <ion-label>Hasil Pemeriksaan</ion-label>
               </ion-list-header>
@@ -207,7 +203,19 @@
                 <ion-radio slot="start" value="Dalam Proses"></ion-radio>
               </ion-item>
             </ion-radio-group>
-          </ion-item-group> <!--/ end of spesimen kedua -->
+          </ion-item-group>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button
+            color="primary"
+            expand="block"
+            disabled="true"
+            (click)="onSave()"
+          >
+            Simpan
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
