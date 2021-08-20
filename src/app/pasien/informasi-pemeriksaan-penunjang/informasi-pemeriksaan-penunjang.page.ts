@@ -132,7 +132,7 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
     }).then(loading => {
       loading.present();
       const infoPemeriksaanPenunjang = {
-        pemeriksaanRdtAntigen: this.form.value.pemeriksaanPenunjang,
+        pemeriksaanRdtAntigen: this.form.value.pemeriksaanRdtAntigen,
         tanggalPemeriksaanRdtAntigen: this.form.value.tanggalPemeriksaanRdtAntigen,
         hasilPemeriksaanRdtAntigen: this.form.value.hasilPemeriksaanRdtAntigen,
         tanggalPemeriksaanRdtAntigen2: this.form.value.tanggalPemeriksaanRdtAntigen2,
@@ -155,6 +155,7 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
         tanggalPengambilanKeluar2: this.form.value.tanggalPengambilanKeluar2,
         hasilPemeriksaanSpesimen2: this.form.value.hasilPemeriksaanSpesimen2
       };
+      console.log(infoPemeriksaanPenunjang);
       this.informasPemeriksaanPenunjangService
       .store(this.pasien.id, infoPemeriksaanPenunjang)
       .subscribe(
