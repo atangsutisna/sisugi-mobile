@@ -192,6 +192,11 @@ export class EditPasienPage implements OnInit {
 
   onUpdate() {
     console.log('on updated called');
+    if (this.form.invalid) {
+      this.alert('Warn', 'Data Mohon dilengkapi');
+      return;
+    }
+
     this.loadingCtrl
       .create({
         message: 'Mohon tunggu',
