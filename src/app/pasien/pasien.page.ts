@@ -50,7 +50,7 @@ export class PasienPage implements OnInit {
                 return;
               }
 
-              this.alert('Error', 'Internal Server Error')
+              this.alert('Error', 'Internal Server Error');
             }
           );
   }
