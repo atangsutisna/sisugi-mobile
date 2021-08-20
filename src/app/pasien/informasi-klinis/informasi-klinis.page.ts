@@ -110,9 +110,7 @@ export class InformasiKlinisPage implements OnInit {
       komorbidLainnya: new FormControl(null, {
         validators: [Validators.required],
       }),
-      ketKomorbidLainnya: new FormControl(null, {
-        validators: [Validators.required],
-      }),
+      ketKomorbidLainnya: new FormControl(null),
       dirawatdirs: new FormControl(null, {
         validators: [Validators.required],
       }),
@@ -133,9 +131,7 @@ export class InformasiKlinisPage implements OnInit {
       lainnya: new FormControl(null, {
         validators: [Validators.required],
       }),
-      ketLainnya: new FormControl(null, {
-        validators: [Validators.required],
-      }),
+      ketLainnya: new FormControl(null),
     });
   }
 
@@ -167,7 +163,7 @@ export class InformasiKlinisPage implements OnInit {
           mualMuntah: informasiKlinis.mualMuntah,
           nyeriAbdomen: informasiKlinis.nyeriAbdomen,
           diare: informasiKlinis.diare,
-          gagguanMenghidu: informasiKlinis.gangguanMenghidu,
+          gangguanMenghidu: informasiKlinis.gangguanMenghidu,
           gangguanMengecap: informasiKlinis.gangguanMengecap,
           gejalaLainnya: informasiKlinis.gejalaLainnya,
           hamil: informasiKlinis.hamil,
@@ -187,6 +183,7 @@ export class InformasiKlinisPage implements OnInit {
           icu: informasiKlinis.icu,
           inturbasi: informasiKlinis.intubasi,
           emco: informasiKlinis.emco,
+          statusTerakhir: informasiKlinis.statusTerakhir,
           pneumonia: informasiKlinis.pneumonia,
           ards: informasiKlinis.ards,
           lainnya: informasiKlinis.lainnya,
@@ -200,11 +197,12 @@ export class InformasiKlinisPage implements OnInit {
   }
 
   onSave() {
-    console.log('store on database');
-    if (this.form.invalid) {
+    const errors = this.form.errors;
+    console.log(errors);
+    /**if (this.form.invalid) {
       this.alert('Warn', 'Mohon dilengkapi');
       return;
-    }
+    }**/
 
     this.loadinCtrl
       .create({
