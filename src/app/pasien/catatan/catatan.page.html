@@ -3,9 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/pasien"></ion-back-button>
     </ion-buttons>
-    <ion-title>Catatan Pasien</ion-title>
+    <ion-title>Status Epidemiologi</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onSave()" disabled="true">
+      <ion-button (click)="onSave()">
         <ion-icon name="save-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -55,7 +55,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button color="primary" expand="block" (click)="onSave()" disabled="true">
+          <ion-button color="primary" expand="block" (click)="onSave()">
             Simpan
           </ion-button>
         </ion-col>

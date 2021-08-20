@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PasienService } from 'src/app/pasien.service';
 import { CatatanPasien } from 'src/app/catatan-pasien.model';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { StatusEpiService } from './status-epi.service';
 
 @Component({
   selector: 'app-catatan',
@@ -14,9 +15,12 @@ import { AlertController } from '@ionic/angular';
 export class CatatanPage implements OnInit {
   catatan: CatatanPasien;
   form: FormGroup;
+  id: string;
   constructor(private pasienService: PasienService,
+              private statusEpidService: StatusEpiService,
               private activateRoute: ActivatedRoute,
-              private alertCtrl: AlertController) { }
+              private alertCtrl: AlertController,
+              private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -26,18 +30,18 @@ export class CatatanPage implements OnInit {
           Validators.required
         ]
       })
-    })
+    });
   }
 
   ionViewWillEnter() {
-    const id = this.activateRoute.snapshot.params.id;
-    this.pasienService.fetchCatatan(id).subscribe(
+    this.id = this.activateRoute.snapshot.params.id;
+    this.pasienService.fetchCatatan(this.id).subscribe(
       (catatan: CatatanPasien) => {
         this.catatan = catatan;
         this.form.patchValue({
           idkasus: catatan.idkasus,
           statusEpidemiologi: catatan.statusEpidemiologi
-        })
+        });
       },
       (error) => {
         if (error.status == 401) {
@@ -50,12 +54,40 @@ export class CatatanPage implements OnInit {
           return;
         }
       }
-    )
+    );
 
   }
 
   onSave() {
+    if (this.form.invalid) {
+      this.alert('Warn', 'Mohon dilengkapi');
+      return;
+    }
 
+    this.loadingCtrl.create({
+      message: 'Mohon tunggu'
+    }).then(loading => {
+      loading.present();
+
+      this.statusEpidService.store(this.id, {
+        statusEpidemiologi: this.form.value.statusEpidemiologi
+      }).subscribe(
+        (resp: any) => {
+          loading.dismiss();
+          this.alert('Info', 'Data sudah disimpan');
+        },
+        (error) => {
+          loading.dismiss();
+          if (error.status == 401) {
+            this.alert('Error', 'Sesi telah habis silakan login ulang');
+          }
+          if (error.status == 500) {
+            this.alert('Error', 'Internal Server Error');
+          }
+
+        }
+      );
+    });
   }
 
   alert(inputHeader: string, inputMessage: string) {
