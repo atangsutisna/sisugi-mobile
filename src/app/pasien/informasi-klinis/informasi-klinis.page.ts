@@ -152,6 +152,46 @@ export class InformasiKlinisPage implements OnInit {
     this.pasienService.fetchInformasiKlinis(id).subscribe(
       (informasiKlinis) => {
         this.informasiKlinis = informasiKlinis;
+        console.log(informasiKlinis);
+        this.form.patchValue({
+          terdapatGejala: informasiKlinis.terdapatGejala,
+          tanggalGejala: informasiKlinis.tanggalGejala,
+          demam: informasiKlinis.demam,
+          batuk: informasiKlinis.batuk,
+          pilek: informasiKlinis.pilek,
+          sakitTenggorokan: informasiKlinis.sakitTenggorokan,
+          sesakNapas: informasiKlinis.sesakNapas,
+          sakitKepala: informasiKlinis.sakitKepala,
+          lemas: informasiKlinis.lemas,
+          nyeriOtot: informasiKlinis.nyeriOtot,
+          mualMuntah: informasiKlinis.mualMuntah,
+          nyeriAbdomen: informasiKlinis.nyeriAbdomen,
+          diare: informasiKlinis.diare,
+          gagguanMenghidu: informasiKlinis.gangguanMenghidu,
+          gangguanMengecap: informasiKlinis.gangguanMengecap,
+          gejalaLainnya: informasiKlinis.gejalaLainnya,
+          hamil: informasiKlinis.hamil,
+          diabetes: informasiKlinis.diabetes,
+          penyakitJantung: informasiKlinis.penyakitJantung,
+          hipertensi: informasiKlinis.hipertensi,
+          keganasan: informasiKlinis.keganasan,
+          gangguanImmunologi: informasiKlinis.gangguanImmunologi,
+          gagalGinjal: informasiKlinis.gagalGinjal,
+          gagalHati: informasiKlinis.gagalHati,
+          ppok: informasiKlinis.ppok,
+          komorbidLainnya: informasiKlinis.komorbidLainnya,
+          ketKomorbidLainnya: informasiKlinis.ketKomorbidLainnya,
+          dirawatdirs: informasiKlinis.dirawatdirs,
+          namars: informasiKlinis.namars,
+          tanggalMasukRs: informasiKlinis.tanggalMasukRs,
+          icu: informasiKlinis.icu,
+          inturbasi: informasiKlinis.intubasi,
+          emco: informasiKlinis.emco,
+          pneumonia: informasiKlinis.pneumonia,
+          ards: informasiKlinis.ards,
+          lainnya: informasiKlinis.lainnya,
+          ketLainnya: informasiKlinis.ketLainnya
+        });
       },
       (error) => {
         this.alert('Error', 'Internal Server Error');

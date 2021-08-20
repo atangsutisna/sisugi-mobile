@@ -341,7 +341,7 @@ export class PasienService {
           const informasiKlinis = response.data;
           return {
             terdapatGejala: informasiKlinis.terdapat_gejala,
-            tanggalGejala: new Date(informasiKlinis.tanggal_gejala),
+            tanggalGejala: informasiKlinis.tanggal_gejala,
             demam: informasiKlinis.demam,
             batuk: informasiKlinis.batuk,
             pilek: informasiKlinis.pilek,
@@ -370,7 +370,7 @@ export class PasienService {
             ketKomorbidLainnya: informasiKlinis.ket_komorbid_lainnya,
             dirawatdirs: informasiKlinis.dirawatdirs,
             namars: informasiKlinis.namars,
-            tanggalMasukRs: new Date(informasiKlinis.tanggal_masuk_rs),
+            tanggalMasukRs: informasiKlinis.tanggal_masuk_rs,
             icu: informasiKlinis.icu,
             intubasi: informasiKlinis.intubasi,
             emco: informasiKlinis.emco,
