@@ -54,7 +54,6 @@ export class EditPasienPage implements OnInit {
         validators: [Validators.required],
       }),
       jenisKelamin: new FormControl(null, {
-        updateOn: 'blur',
         validators: [Validators.required],
       }),
       tanggalLahir: new FormControl(null, {
@@ -62,7 +61,6 @@ export class EditPasienPage implements OnInit {
         validators: [Validators.required],
       }),
       pekerjaan: new FormControl(null, {
-        updateOn: 'blur',
         validators: [Validators.required],
       }),
       nohp: new FormControl(null),
@@ -161,6 +159,7 @@ export class EditPasienPage implements OnInit {
         this.listProvinsi = await this.geoService.provinsi.toPromise();
         this.pasien = await this.pasienService.fetch(this.id).toPromise();
         console.log(`provinsi id ${this.pasien.provinsiId}`);
+        console.log(`jenis kelamin on ionwillenter ${this.pasien.jenisKelamin}`);
         this.form.patchValue({
           nik: this.pasien.nik,
           nama: this.pasien.nama,
@@ -191,7 +190,7 @@ export class EditPasienPage implements OnInit {
   }
 
   onUpdate() {
-    console.log('on updated called');
+    console.log(this.form);
     if (this.form.invalid) {
       this.alert('Warn', 'Data Mohon dilengkapi');
       return;
