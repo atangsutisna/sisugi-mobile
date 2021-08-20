@@ -70,7 +70,7 @@ export class PenyelidikanEpiPage implements OnInit {
           pasien.kabkotaId == null ||
           pasien.kecamatanId == null ||
           pasien.kelurahanId == null) {
-          this.alert('Warn', 'Data pasien belum lengkap. Silakan dilengkapi terlebih dahulu');
+          this.alert('Warn', 'Data pasien belum lengkap. Apakah anda mau melengkapi?');
       }
     });
   }
@@ -82,9 +82,15 @@ export class PenyelidikanEpiPage implements OnInit {
         message: inputMessage,
         buttons: [
           {
-            text: 'Ok',
+            text: 'Ya',
             handler: () => {
               this.router.navigateByUrl('/pasien/edit-pasien/'+ this.pasien.id);
+            },
+          },
+          {
+            text: 'Tidak',
+            handler: () => {
+              this.router.navigateByUrl('/pasien/profile/'+ this.pasien.id);
             },
           },
         ],
