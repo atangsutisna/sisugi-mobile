@@ -222,9 +222,9 @@ export class PasienService {
         })
     };
 
-    const apiUri = new URL(environment.apiUri + '/pasien/' + pasienId + "/kontak-erat");
+    const apiUri = new URL(environment.apiUri + '/pasien/' + pasienId + '/kontak-erat');
     return this.httpClient.get(apiUri.href, httpOptions).pipe(map((response: any) => {
-      const contacts : Array<KontakErat> = [];
+      const contacts: Array<KontakErat> = [];
       for (const ke of response.data) {
         contacts.push({
           id: ke.id,
@@ -258,7 +258,7 @@ export class PasienService {
     };
 
     return this.httpClient
-      .get(environment.apiUri + '/pasien/' + id + "/penyelidikan-epi", httpOptions)
+      .get(environment.apiUri + '/pasien/' + id + '/penyelidikan-epi', httpOptions)
       .pipe(
         map((response: any) => {
           const penyelidikanPe = response.data;
@@ -365,7 +365,7 @@ export class PasienService {
     };
 
     return this.httpClient
-      .get(environment.apiUri + '/pasien/' + id + "/isoman", httpOptions)
+      .get(environment.apiUri + '/pasien/' + id + '/isoman', httpOptions)
       .pipe(
         map((resp: any) => {
           const isomans: Array<Isoman> = [];
@@ -398,7 +398,7 @@ export class PasienService {
     };
 
     return this.httpClient
-      .get(environment.apiUri + '/pasien/' + id + "/catatan", httpOptions)
+      .get(environment.apiUri + '/pasien/' + id + '/catatan', httpOptions)
       .pipe(map((resp: any) => {
         return {
           idkasus: resp.data.idkasus,
