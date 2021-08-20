@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Pasien } from 'src/app/pasien.model';
 import { PasienService } from 'src/app/pasien.service';
-import { InformasiKlinisService } from '../informasi-klinis/informasi-klinis.service';
+import { InformasiPemeriksaanPenunjangService } from './informasi-pemeriksaan-penunjang.service';
 
 @Component({
   selector: 'app-informasi-pemeriksaan-penunjang',
@@ -52,7 +52,7 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
   constructor(
     private pasienService: PasienService,
     private activateRoute: ActivatedRoute,
-    private informasiKlinisService: InformasiKlinisService,
+    private informasPemeriksaanPenunjangService: InformasiPemeriksaanPenunjangService,
     private alertCtrl: AlertController,
     private loadinCtrl: LoadingController
   ) { }
@@ -127,7 +127,64 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
   }
 
   onSave() {
-    console.log('save to database');
+    this.loadinCtrl.create({
+      message: 'Mohon tunggu'
+    }).then(loading => {
+      loading.present();
+      const infoPemeriksaanPenunjang = {
+        pemeriksaanRdtAntigen: this.form.value.pemeriksaanPenunjang,
+        tanggalPemeriksaanRdtAntigen: this.form.value.tanggalPemeriksaanRdtAntigen,
+        hasilPemeriksaanRdtAntigen: this.form.value.hasilPemeriksaanRdtAntigen,
+        tanggalPemeriksaanRdtAntigen2: this.form.value.tanggalPemeriksaanRdtAntigen2,
+        hasilPemeriksaanRdtAntigen2: this.form.value.hasilPemeriksaanRdtAntigen2,
+        spesimen: this.form.value.spesimen,
+        jenisSpesimen1: this.form.value.jenisSpesimen1,
+        swabNasofaring1: this.form.value.swabNasofaring1,
+        swabOrofaring1: this.form.value.swabOrofaring1,
+        sputum1: this.form.value.sputum1,
+        serum1: this.form.value.serum1,
+        tanggalPengambilan1: this.form.value.tanggalPengambilan1,
+        tanggalPengambilanKeluar1: this.form.value.tanggalPengambilanKeluar1,
+        hasilPemeriksaanSpesimen1: this.form.value.hasilPemeriksaanSpesimen1,
+        jenisSpesimen2: this.form.value.jenisSpesimen2,
+        swabNasofaring2: this.form.value.swabNasofaring2,
+        swabOrofaring2: this.form.value.swabOrofaring2,
+        sputum2: this.form.value.sputum2,
+        serum2: this.form.value.serum2,
+        tanggalPengambilan2: this.form.value.tanggalPengambilan2,
+        tanggalPengambilanKeluar2: this.form.value.tanggalPengambilanKeluar2,
+        hasilPemeriksaanSpesimen2: this.form.value.hasilPemeriksaanSpesimen2
+      };
+      this.informasPemeriksaanPenunjangService
+      .store(this.pasien.id, infoPemeriksaanPenunjang)
+      .subscribe(
+        (resp: any) => {
+          loading.dismiss();
+          this.alert('Info', 'Data sudah disimpan');
+        },
+        (error) => {
+          loading.dismiss();
+          if (error.status == 401) {
+            this.alert('Warn', 'Masa sesi habis, silakan login ulang');
+          }
+
+          if (error.status == 500) {
+            this.alert('Error', 'Internal Server Error');
+          }
+        }
+      );
+    });
   }
 
+  alert(inputHeader: string, inputMessage: string) {
+    this.alertCtrl
+      .create({
+        header: inputHeader,
+        message: inputMessage,
+        buttons: ['Ok'],
+      })
+      .then((toast) => {
+        toast.present();
+      });
+  }
 }

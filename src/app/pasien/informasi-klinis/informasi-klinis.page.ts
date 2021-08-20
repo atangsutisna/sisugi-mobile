@@ -281,12 +281,10 @@ export class InformasiKlinisPage implements OnInit {
   }
 
   onSave() {
-    const errors = this.form.errors;
-    console.log(errors);
-    /**if (this.form.invalid) {
+    if (this.form.invalid) {
       this.alert('Warn', 'Mohon dilengkapi');
       return;
-    }**/
+    }
 
     this.loadinCtrl
       .create({
