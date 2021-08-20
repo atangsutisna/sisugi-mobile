@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'vaksinasi/:id',
     loadChildren: () => import('./vaksinasi/vaksinasi.module').then( m => m.VaksinasiPageModule)
   },
+  {
+    path: 'penyelidikan-epi/:id',
+    loadChildren: () => import('./penyelidikan-epi/penyelidikan-epi.module').then( m => m.PenyelidikanEpiPageModule)
+  },
 ];
 
 @NgModule({

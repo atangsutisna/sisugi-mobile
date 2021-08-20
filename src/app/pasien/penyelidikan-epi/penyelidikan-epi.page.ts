@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Pasien } from 'src/app/pasien.model';
 import { ActivatedRoute } from '@angular/router';
+import { Pasien } from 'src/app/pasien.model';
 import { PasienService } from 'src/app/pasien.service';
-import { LoadingController } from '@ionic/angular';
-import { PenyelidikanEpi } from 'src/app/penyelidikan-epi.model';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-penyelidikan-epi',
+  templateUrl: './penyelidikan-epi.page.html',
+  styleUrls: ['./penyelidikan-epi.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class PenyelidikanEpiPage implements OnInit {
   pasien: Pasien = {
     id: null,
     idKasus: null,
@@ -45,40 +43,19 @@ export class ProfilePage implements OnInit {
     updatedAt: null,
     createdAt: null,
   };
-  penyelidikanEpi: PenyelidikanEpi = {
-    id: null,
-    tanggalWawancara: null,
-    statusEpidemiologi: null,
-    status: null,
-    createdAt: null,
-    updatedAt: null,
-  };
   constructor(
     private activateRoute: ActivatedRoute,
     private pasienService: PasienService,
-    private loadingCtrl: LoadingController
-  ) {}
+  ) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     const id = this.activateRoute.snapshot.params.id;
     this.pasienService.fetch(id).subscribe((pasien) => {
       this.pasien = pasien;
     });
-
-    this.pasienService.fetchPe(id).subscribe(
-      (penyelidikanEpi) => {
-        console.log('Got penyelidikan pe');
-        this.penyelidikanEpi = penyelidikanEpi;
-      },
-      (error) => {
-        if (error.status == 404) {
-          console.log('Failed to fetch penyelidikan epi');
-        } else {
-          console.log('Unknown error');
-        }
-      });
   }
 
-  ionViewWillEnter() {
-  }
 }
