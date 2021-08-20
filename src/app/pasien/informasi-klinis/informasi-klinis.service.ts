@@ -3,6 +3,7 @@ import { InformasiKlinis } from './informasi-klinis.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginService } from 'src/app/login/login.service';
 import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class InformasiKlinisService {
 
     const reqBody = {
       'terdapat_gejala': informasKlinis.terdapatGejala,
-      'tanggal_gejala': informasKlinis.tanggalGejala,
+      'tanggal_gejala': moment(informasKlinis.tanggalGejala).format('YYYY-MM-DD'),
       'demam': informasKlinis.demam,
       'batuk': informasKlinis.batuk,
       'pilek': informasKlinis.pilek,
@@ -52,7 +53,7 @@ export class InformasiKlinisService {
       'ket_komorbid_lainnya': informasKlinis.ketKomorbidLainnya,
       'dirawatdirs': informasKlinis.dirawatdirs,
       'namars': informasKlinis.namars,
-      'tanggal_masuk_rs': informasKlinis.tanggalMasukRs,
+      'tanggal_masuk_rs': moment(informasKlinis.tanggalMasukRs).format('YYYY-MM-DD'),
       'icu': informasKlinis.icu,
       'intubasi': informasKlinis.intubasi,
       'emco': informasKlinis.emco,

@@ -70,9 +70,9 @@ export class PemantauanKesService {
     if (pemantauanKes.pcr == true) {
       console.log('convert rt-pcr');
       tanggalPcr1 = moment(pemantauanKes.tanggalPcr1).format('YYYY-MM-DD');
-      tanggalKeluarPcr1 = moment(pemantauanKes.tanggalKeluarPcr1).format('YYYY-MM-DD')
+      tanggalKeluarPcr1 = moment(pemantauanKes.tanggalKeluarPcr1).format('YYYY-MM-DD');
       tanggalPcr2 = moment(pemantauanKes.tanggalPcr2).format('YYYY-MM-DD');
-      tanggalKeluarPcr2 = moment(pemantauanKes.tanggalKeluarPcr2).format('YYYY-MM-DD')
+      tanggalKeluarPcr2 = moment(pemantauanKes.tanggalKeluarPcr2).format('YYYY-MM-DD');
     }
 
     const postPemantauanKes = {
@@ -96,7 +96,7 @@ export class PemantauanKesService {
       'status': pemantauanKes.status,
       'pemantauan_terakhir': pemantauanKes.pemantauanTerakhir,
       'status_akhir': pemantauanKes.statusAkhir,
-    }
+    };
     return this.httpClient.post<PostPemantauanKesehatan>(environment.apiUri + '/pemantauan-kes', postPemantauanKes, httpOptions);
   }
 }

@@ -192,6 +192,30 @@ export class InformasiKlinisPage implements OnInit {
       }
 
     });
+
+    this.form.get('dirawatdirs').valueChanges.subscribe((value) => {
+      if (value == '1') {
+        this.form.patchValue({
+          namars: this.informasiKlinis.namars,
+          tanggalMasukRs: this.informasiKlinis.tanggalMasukRs,
+          icu: this.informasiKlinis.icu,
+          inturbasi: this.informasiKlinis.intubasi,
+          emco: this.informasiKlinis.emco,
+        });
+      }
+
+      if (value == '0') {
+        this.form.patchValue({
+          namars: null,
+          tanggalMasukRs: null,
+          icu: null,
+          inturbasi: null,
+          emco: null
+        });
+      }
+
+    });
+
   }
 
   ionViewWillEnter() {
@@ -303,7 +327,7 @@ export class InformasiKlinisPage implements OnInit {
           namars: this.form.value.namars,
           tanggalMasukRs: this.form.value.tanggalMasukRs,
           icu: this.form.value.icu,
-          intubasi: this.form.value.intubasi,
+          intubasi: this.form.value.inturbasi,
           emco: this.form.value.emco,
           statusTerakhir: this.form.value.statusTerakhir,
           pneumonia: this.form.value.pneumonia,
@@ -320,6 +344,7 @@ export class InformasiKlinisPage implements OnInit {
               this.alert('Info', 'Data sudah disimpan');
             },
             (error) => {
+              loading.dismiss();
               if (error.status == 401) {
                 this.alert('Warn', 'Masa sesi habis, silakan login ulang');
               }
