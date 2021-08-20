@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { InformasiKlinisService } from './informasi-klinis.service';
+import { InformasiKlinis } from './informasi-klinis.model';
 
 @Component({
   selector: 'app-informasi-klinis',
@@ -46,6 +47,7 @@ export class InformasiKlinisPage implements OnInit {
     updatedAt: null,
     createdAt: null,
   };
+  informasiKlinis: InformasiKlinis;
   form: FormGroup;
   constructor(
     private pasienService: PasienService,
@@ -139,12 +141,21 @@ export class InformasiKlinisPage implements OnInit {
 
   ionViewWillEnter() {
     const id = this.activateRoute.snapshot.params.id;
-    this.pasienService.fetch(id).subscribe((pasien) => {
-      this.pasien = pasien;
-    });
+    this.pasienService.fetch(id).subscribe(
+      (pasien) => {
+        this.pasien = pasien;
+      },
+      (error) => {
+        this.alert('Error', 'Internal Server Error');
+      });
 
-    this.pasienService.fetchPe(id).subscribe((pasien) => {
-    });
+    this.pasienService.fetchInformasiKlinis(id).subscribe(
+      (informasiKlinis) => {
+        this.informasiKlinis = informasiKlinis;
+      },
+      (error) => {
+        this.alert('Error', 'Internal Server Error');
+      });
 
   }
 
