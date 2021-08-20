@@ -11,7 +11,7 @@ import { PenyelidikanEpi } from './penyelidikan-epi.model';
 import { Observable } from 'rxjs';
 import { Isoman } from './isoman.model';
 import { CatatanPasien } from './catatan-pasien.model';
-import { PenyelidikanEpiPage } from './penyelidikan-epi/penyelidikan-epi.page';
+import { InformasiKlinis } from './pasien/informasi-klinis/informasi-klinis.model';
 
 @Injectable({
   providedIn: 'root',
@@ -326,7 +326,7 @@ export class PasienService {
       }));
   }
 
-  fetchInformasiKlinis(id: string): Observable<PenyelidikanEpi> {
+  fetchInformasiKlinis(id: string): Observable<InformasiKlinis> {
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.loginService.getUser().value.token,
@@ -338,14 +338,47 @@ export class PasienService {
       .get(environment.apiUri + '/pasien/' + id + '/informasi-klinis', httpOptions)
       .pipe(
         map((response: any) => {
-          const penyelidikanPe = response.data;
+          const informasiKlinis = response.data;
           return {
-            id: penyelidikanPe.id,
-            tanggalWawancara: penyelidikanPe.tanggal_wawancara,
-            statusEpidemiologi: penyelidikanPe.status_epidemiologi,
-            status: penyelidikanPe.status,
-            createdAt: new Date(penyelidikanPe.created_at),
-            updatedAt: new Date(penyelidikanPe.updated_at)
+            terdapatGejala: informasiKlinis.terdapat_gejala,
+            tanggalGejala: new Date(informasiKlinis.tanggal_gejala),
+            demam: informasiKlinis.demam,
+            batuk: informasiKlinis.batuk,
+            pilek: informasiKlinis.pilek,
+            sakitTenggorokan: informasiKlinis.sakit_tenggorokan,
+            sesakNapas: informasiKlinis.sesak_napas,
+            sakitKepala: informasiKlinis.sakit_kepala,
+            lemas: informasiKlinis.lemas,
+            nyeriOtot: informasiKlinis.nyeri_otot,
+            mualMuntah: informasiKlinis.mual_muntah,
+            nyeriAbdomen: informasiKlinis.nyeri_abdomen,
+            diare: informasiKlinis.diare,
+            gangguanMenghidu: informasiKlinis.gangguan_menghidu,
+            gangguanMengecap: informasiKlinis.gangguan_mengecap,
+            gejalaLainnya: informasiKlinis.gejala_lainnya,
+            ketGejalaLainnya: informasiKlinis.ket_gejala_lainnya,
+            hamil: informasiKlinis.hamil,
+            diabetes: informasiKlinis.diabetes,
+            penyakitJantung: informasiKlinis.penyakit_jantung,
+            hipertensi: informasiKlinis.hipertensi,
+            keganasan: informasiKlinis.keganasan,
+            gangguanImmunologi: informasiKlinis.gangguan_imunologi,
+            gagalGinjal: informasiKlinis.gagal_ginjal,
+            gagalHati: informasiKlinis.gagal_hati,
+            ppok: informasiKlinis.ppok,
+            komorbidLainnya: informasiKlinis.komorbid_lainnya,
+            ketKomorbidLainnya: informasiKlinis.ket_komorbid_lainnya,
+            dirawatdirs: informasiKlinis.dirawatdirs,
+            namars: informasiKlinis.namars,
+            tanggalMasukRs: new Date(informasiKlinis.tanggal_masuk_rs),
+            icu: informasiKlinis.icu,
+            intubasi: informasiKlinis.intubasi,
+            emco: informasiKlinis.emco,
+            statusTerakhir: informasiKlinis.status_terakhir,
+            pneumonia: informasiKlinis.pneumonia,
+            ards: informasiKlinis.ards,
+            lainnya: informasiKlinis.lainnya,
+            ketLainnya: informasiKlinis.ket_lainnya,
           };
         })
       );
