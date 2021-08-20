@@ -1,3 +1,4 @@
+import { InformasiPemeriksaanPenunjang } from './informasi-pemeriksaan-penunjang.model';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -47,6 +48,7 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
     createdAt: null,
   };
   form: FormGroup;
+  informasiPemeriksaanPenunjang: InformasiPemeriksaanPenunjang;
   constructor(
     private pasienService: PasienService,
     private activateRoute: ActivatedRoute,
@@ -62,7 +64,6 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
       }),
       tanggalPemeriksaanRdtAntigen: new FormControl(null),
       hasilPemeriksaanRdtAntigen: new FormControl(null),
-      pemeriksaanRdtAntigen2: new FormControl(null),
       tanggalPemeriksaanRdtAntigen2: new FormControl(null),
       hasilPemeriksaanRdtAntigen2: new FormControl(null),
       spesimen: new FormControl(null, {
@@ -92,6 +93,37 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
     this.pasienService.fetch(id).subscribe((pasien) => {
       this.pasien = pasien;
     });
+
+    this.pasienService.fetchInformasiPemeriksaanPenunjang(id)
+    .subscribe((informasiPemeriksaanPenunjang) => {
+      console.log(informasiPemeriksaanPenunjang);
+      this.informasiPemeriksaanPenunjang = informasiPemeriksaanPenunjang;
+      this.form.patchValue({
+        pemeriksaanRdtAntigen: informasiPemeriksaanPenunjang.pemeriksaanRdtAntigen,
+        tanggalPemeriksaanRdtAntigen: informasiPemeriksaanPenunjang.tanggalPemeriksaanRdtAntigen,
+        hasilPemeriksaanRdtAntigen: informasiPemeriksaanPenunjang.hasilPemeriksaanRdtAntigen,
+        tanggalPemeriksaanRdtAntigen2: informasiPemeriksaanPenunjang.tanggalPemeriksaanRdtAntigen2,
+        hasilPemeriksaanRdtAntigen2: informasiPemeriksaanPenunjang.hasilPemeriksaanRdtAntigen2,
+        spesimen: informasiPemeriksaanPenunjang.spesimen,
+        jenisSpesimen1: informasiPemeriksaanPenunjang.jenisSpesimen1,
+        swabOrofaring1: informasiPemeriksaanPenunjang.swabOrofaring1,
+        swabNasofaring1: informasiPemeriksaanPenunjang.swabNasofaring1,
+        sputum1: informasiPemeriksaanPenunjang.sputum1,
+        serum1: informasiPemeriksaanPenunjang.serum1,
+        tanggalPengambilan1: informasiPemeriksaanPenunjang.tanggalPengambilan1,
+        tanggalPengambilanKeluar1: informasiPemeriksaanPenunjang.tanggalPengambilanKeluar1,
+        hasilPemeriksaanSpesimen1: informasiPemeriksaanPenunjang.hasilPemeriksaanSpesimen1,
+        jenisSpesimen2: informasiPemeriksaanPenunjang.jenisSpesimen2,
+        swabOrofaring2: informasiPemeriksaanPenunjang.swabOrofaring2,
+        swabNafofaring2: informasiPemeriksaanPenunjang.swabNasofaring2,
+        sputum2: informasiPemeriksaanPenunjang.sputum2,
+        serum2: informasiPemeriksaanPenunjang.serum2,
+        tanggalPengambilan2: informasiPemeriksaanPenunjang.tanggalPengambilan2,
+        tanggalPengambilanKeluar2: informasiPemeriksaanPenunjang.tanggalPengambilanKeluar2,
+        hasilPemeriksaanSpesimen2: informasiPemeriksaanPenunjang.hasilPemeriksaanSpesimen2,
+      });
+    });
+
   }
 
   onSave() {

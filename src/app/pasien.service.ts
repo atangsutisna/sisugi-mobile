@@ -1,3 +1,4 @@
+import { InformasiPemeriksaanPenunjang } from './pasien/informasi-pemeriksaan-penunjang/informasi-pemeriksaan-penunjang.model';
 import { PemantauanKesehatan } from './pemantauan-kes.model';
 import { PostPasien } from './post-pasien.model';
 import { LoginService } from './login/login.service';
@@ -382,5 +383,47 @@ export class PasienService {
           };
         })
       );
+  }
+
+  fetchInformasiPemeriksaanPenunjang(id: string): Observable<InformasiPemeriksaanPenunjang> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.loginService.getUser().value.token,
+        Accept: 'application/json',
+      }),
+    };
+
+    return this.httpClient
+      .get(environment.apiUri + '/pasien/' + id + '/informasi-pemeriksaan-penunjang', httpOptions)
+      .pipe(
+        map((response: any) => {
+          const informasiPemeriksaanPenunjang = response.data;
+          return {
+            pemeriksaanRdtAntigen: informasiPemeriksaanPenunjang.pemeriksaan_rdt_antigen,
+            tanggalPemeriksaanRdtAntigen: informasiPemeriksaanPenunjang.tanggal_pemeriksaan_rdt_antigen,
+            hasilPemeriksaanRdtAntigen: informasiPemeriksaanPenunjang.hasil_pemeriksaan_rdt_antigen,
+            tanggalPemeriksaanRdtAntigen2: informasiPemeriksaanPenunjang.tanggal_pemeriksaan_rdt_antigen2,
+            hasilPemeriksaanRdtAntigen2: informasiPemeriksaanPenunjang.hasil_pemeriksaan_rdt_antigen2,
+            spesimen: informasiPemeriksaanPenunjang.spesimen,
+            jenisSpesimen1: informasiPemeriksaanPenunjang.jenis_spesimen_1,
+            swabNasofaring1: informasiPemeriksaanPenunjang.swab_nasofaring_1,
+            swabOrofaring1: informasiPemeriksaanPenunjang.swab_orofaring_1,
+            sputum1: informasiPemeriksaanPenunjang.sputum_1,
+            serum1: informasiPemeriksaanPenunjang.serum_1,
+            tanggalPengambilan1: informasiPemeriksaanPenunjang.tanggal_pengambilan_1,
+            tanggalPengambilanKeluar1: informasiPemeriksaanPenunjang.tanggal_pengambilan_keluar_1,
+            hasilPemeriksaanSpesimen1: informasiPemeriksaanPenunjang.hasil_pemeriksaan_spesimen_1,
+            jenisSpesimen2: informasiPemeriksaanPenunjang.jenis_spesimen_2,
+            swabNasofaring2: informasiPemeriksaanPenunjang.swab_nasofaring_2,
+            swabOrofaring2: informasiPemeriksaanPenunjang.swab_orofaring_2,
+            sputum2: informasiPemeriksaanPenunjang.sputum_2,
+            serum2: informasiPemeriksaanPenunjang.serum_2,
+            tanggalPengambilan2: informasiPemeriksaanPenunjang.tanggal_pengambilan_2,
+            tanggalPengambilanKeluar2: informasiPemeriksaanPenunjang.tanggal_pengambilan_keluar_2,
+            hasilPemeriksaanSpesimen2: informasiPemeriksaanPenunjang.hasil_pemeriksaan_spesimen_2
+          };
+        })
+      );
+
   }
 }
