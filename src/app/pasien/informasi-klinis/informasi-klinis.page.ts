@@ -166,6 +166,7 @@ export class InformasiKlinisPage implements OnInit {
           gangguanMenghidu: informasiKlinis.gangguanMenghidu,
           gangguanMengecap: informasiKlinis.gangguanMengecap,
           gejalaLainnya: informasiKlinis.gejalaLainnya,
+          ketGejalaLainnya: informasiKlinis.ketGejalaLainnya,
           hamil: informasiKlinis.hamil,
           diabetes: informasiKlinis.diabetes,
           penyakitJantung: informasiKlinis.penyakitJantung,
