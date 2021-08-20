@@ -177,6 +177,21 @@ export class InformasiKlinisPage implements OnInit {
         });
       }
     });
+
+    this.form.get('gejalaLainnya').valueChanges.subscribe((value) => {
+      if (value == '1') {
+        this.form.patchValue({
+          ketGejalaLainnya: this.informasiKlinis.ketGejalaLainnya
+        });
+      }
+
+      if (value == '0') {
+        this.form.patchValue({
+          ketGejalaLainnya: null,
+        });
+      }
+
+    });
   }
 
   ionViewWillEnter() {

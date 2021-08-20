@@ -213,7 +213,7 @@
                 <ion-radio slot="start" value="0"></ion-radio>
               </ion-item>
             </ion-radio-group>
-            <ion-item>
+            <ion-item *ngIf="form.get('gejalaLainnya').value == '1'">
               <ion-label position="floating">Keterangan Lainnya</ion-label>
               <ion-input formControlName="ketGejalaLainnya"></ion-input>
             </ion-item>
