@@ -318,7 +318,7 @@ export class PasienService {
     };
 
     return this.httpClient
-      .get(environment.apiUri + '/pasien/' + id + '/catatan', httpOptions)
+      .get(environment.apiUri + '/pasien/' + id + '/status-epi', httpOptions)
       .pipe(map((resp: any) => {
         return {
           idkasus: resp.data.idkasus,
