@@ -26,7 +26,7 @@ export class StatusEpiService {
     };
 
     return this.httpClient.put(
-      environment.apiUri + '/pasien/' + pasienId + '/informasi-klinis',
+      environment.apiUri + '/pasien/' + pasienId + '/status-epid',
       reqBody,
       httpOptions
     );
