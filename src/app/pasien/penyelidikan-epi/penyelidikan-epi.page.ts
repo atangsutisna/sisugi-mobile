@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Pasien } from 'src/app/pasien.model';
 import { PasienService } from 'src/app/pasien.service';
 
@@ -43,19 +45,53 @@ export class PenyelidikanEpiPage implements OnInit {
     updatedAt: null,
     createdAt: null,
   };
+  form: FormGroup;
   constructor(
     private activateRoute: ActivatedRoute,
     private pasienService: PasienService,
+    private alertCtrl: AlertController,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      tanggalWawancara: new FormControl(null, [
+        Validators.required
+      ])
+    });
   }
 
   ionViewWillEnter() {
     const id = this.activateRoute.snapshot.params.id;
     this.pasienService.fetch(id).subscribe((pasien) => {
       this.pasien = pasien;
+      if (pasien.nik == null ||
+          pasien.provinsiId == null ||
+          pasien.kabkotaId == null ||
+          pasien.kecamatanId == null ||
+          pasien.kelurahanId == null) {
+          this.alert('Warn', 'Data pasien belum lengkap. Silakan dilengkapi terlebih dahulu');
+      }
     });
+  }
+
+  alert(inputHeader: string, inputMessage: string) {
+    this.alertCtrl
+      .create({
+        header: inputHeader,
+        message: inputMessage,
+        buttons: [
+          {
+            text: 'Ok',
+            handler: () => {
+              this.router.navigateByUrl('/pasien/edit-pasien/'+ this.pasien.id);
+            },
+          },
+        ],
+      })
+      .then((loading) => {
+        loading.present();
+      });
   }
 
 }

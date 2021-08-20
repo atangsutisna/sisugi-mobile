@@ -4,6 +4,11 @@
       <ion-back-button defaultHref="/pasien"></ion-back-button>
     </ion-buttons>
     <ion-title>Penyelidikan Epidemiologi</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -37,7 +42,18 @@
               </p>
             </ion-label>
           </ion-item>
+          <ion-item>
+            <ion-label position="floating">Tanggal Wawancara</ion-label>
+            <ion-datetime></ion-datetime>
+          </ion-item>
         </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button color="primary" expand="block">
+          Simpan
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
