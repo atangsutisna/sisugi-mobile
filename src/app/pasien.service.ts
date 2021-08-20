@@ -325,4 +325,29 @@ export class PasienService {
         };
       }));
   }
+
+  fetchInformasiKlinis(id: string): Observable<PenyelidikanEpi> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.loginService.getUser().value.token,
+        Accept: 'application/json',
+      }),
+    };
+
+    return this.httpClient
+      .get(environment.apiUri + '/pasien/' + id + '/informasi-klinis', httpOptions)
+      .pipe(
+        map((response: any) => {
+          const penyelidikanPe = response.data;
+          return {
+            id: penyelidikanPe.id,
+            tanggalWawancara: penyelidikanPe.tanggal_wawancara,
+            statusEpidemiologi: penyelidikanPe.status_epidemiologi,
+            status: penyelidikanPe.status,
+            createdAt: new Date(penyelidikanPe.created_at),
+            updatedAt: new Date(penyelidikanPe.updated_at)
+          };
+        })
+      );
+  }
 }

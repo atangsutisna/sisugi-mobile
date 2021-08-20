@@ -142,6 +142,10 @@ export class InformasiKlinisPage implements OnInit {
     this.pasienService.fetch(id).subscribe((pasien) => {
       this.pasien = pasien;
     });
+
+    this.pasienService.fetchPe(id).subscribe((pasien) => {
+    });
+
   }
 
   onSave() {
@@ -190,7 +194,7 @@ export class InformasiKlinisPage implements OnInit {
           namars: this.form.value.namars,
           tanggalMasukRs: this.form.value.tanggalMasukRs,
           icu: this.form.value.icu,
-          inturbasi: this.form.value.inturbasi,
+          intubasi: this.form.value.intubasi,
           emco: this.form.value.emco,
           statusTerakhir: this.form.value.statusTerakhir,
           pneumonia: this.form.value.pneumonia,

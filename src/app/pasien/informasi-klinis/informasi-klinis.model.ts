@@ -31,7 +31,7 @@ export class InformasiKlinis {
   namars: string;
   tanggalMasukRs: Date;
   icu: boolean;
-  inturbasi: boolean;
+  intubasi: boolean;
   emco: boolean;
   statusTerakhir: string;
   pneumonia: string;
