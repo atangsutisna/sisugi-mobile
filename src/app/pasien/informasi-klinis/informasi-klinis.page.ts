@@ -133,6 +133,50 @@ export class InformasiKlinisPage implements OnInit {
       }),
       ketLainnya: new FormControl(null),
     });
+
+    this.form.get('terdapatGejala').valueChanges.subscribe((value) => {
+      if (value == '1') {
+        this.form.patchValue({
+          tanggalGejala: this.informasiKlinis.tanggalGejala,
+          demam: this.informasiKlinis.demam,
+          batuk: this.informasiKlinis.batuk,
+          pilek:  this.informasiKlinis.pilek,
+          sakitTenggorokan:  this.informasiKlinis.sakitTenggorokan,
+          sesakNapas:  this.informasiKlinis.sesakNapas,
+          sakitKepala:  this.informasiKlinis.sakitKepala,
+          lemas:  this.informasiKlinis.lemas,
+          nyeriOtot:  this.informasiKlinis.nyeriOtot,
+          mualMuntah:  this.informasiKlinis.mualMuntah,
+          nyeriAbdomen:  this.informasiKlinis.nyeriAbdomen,
+          diare:  this.informasiKlinis.diare,
+          gangguanMenghidu:  this.informasiKlinis.gangguanMenghidu,
+          gangguanMengecap:  this.informasiKlinis.gangguanMengecap,
+          gejalaLainnya:  this.informasiKlinis.gejalaLainnya,
+          ketGejalaLainnya:  this.informasiKlinis.ketGejalaLainnya,
+        });
+      }
+
+      if (value == '0') {
+        this.form.patchValue({
+          tanggalGejala: null,
+          demam: null,
+          batuk: null,
+          pilek: null,
+          sakitTenggorokan: null,
+          sesakNapas: null,
+          sakitKepala: null,
+          lemas: null,
+          nyeriOtot: null,
+          mualMuntah: null,
+          nyeriAbdomen: null,
+          diare: null,
+          gangguanMenghidu: null,
+          gangguanMengecap: null,
+          gejalaLainnya: null,
+          ketGejalaLainnya: null,
+        });
+      }
+    });
   }
 
   ionViewWillEnter() {
