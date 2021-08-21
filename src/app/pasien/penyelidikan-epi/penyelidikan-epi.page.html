@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Penyelidikan Epidemiologi</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="onSave()">
         <ion-icon name="save-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -51,7 +51,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button color="primary" expand="block">
+        <ion-button color="primary" expand="block" (click)="onSave()">
           Simpan
         </ion-button>
       </ion-col>

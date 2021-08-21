@@ -100,4 +100,17 @@ export class PenyelidikanEpiPage implements OnInit {
       });
   }
 
+  onSave() {
+    if (this.form.invalid) {
+      this.alertCtrl.create({
+        header: 'Warn',
+        message: 'Mohon dilengkapi',
+        buttons: ['Ok'],
+      }).then((alert) => {
+        alert.present();
+      });
+      return;
+    }
+  }
+
 }
