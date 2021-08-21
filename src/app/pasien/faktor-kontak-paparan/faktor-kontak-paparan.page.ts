@@ -1,3 +1,4 @@
+import { FaktorKontakPaparan } from './faktor-kontak-paparan.model';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -45,6 +46,7 @@ export class FaktorKontakPaparanPage implements OnInit {
     createdAt: null,
   };
   form: FormGroup;
+  faktorKontakPaparan: FaktorKontakPaparan;
   constructor(
     private pasienService: PasienService,
     private activateRoute: ActivatedRoute,
@@ -92,6 +94,30 @@ export class FaktorKontakPaparanPage implements OnInit {
     this.pasienService.fetch(id).subscribe((pasien) => {
       this.pasien = pasien;
     });
+
+    this.pasienService.fetchFaktorKontakPaparan(id).subscribe((faktorKontakPaparan) => {
+      this.faktorKontakPaparan = faktorKontakPaparan;
+      console.log(faktorKontakPaparan);
+      this.form.patchValue({
+        keluarNegeri: faktorKontakPaparan.keluarNegeri,
+        transmisiLokal: faktorKontakPaparan.transmisiLokal,
+        kunjunganFaskes: faktorKontakPaparan.kunjunganFaskes,
+        pasarHewan: faktorKontakPaparan.pasarHewan,
+        kontakSuspek: faktorKontakPaparan.kontakSuspek,
+        kontakKonfirmasi: faktorKontakPaparan.kontakKonfirmasi,
+        ispaBerat: faktorKontakPaparan.ispaBerat,
+        petugasKesehatan: faktorKontakPaparan.petugasKesehatan,
+        apd: faktorKontakPaparan.apd,
+        gown: faktorKontakPaparan.gown,
+        masker: faktorKontakPaparan.masker,
+        sarungTangan: faktorKontakPaparan.sarungTangan,
+        maskerniosn: faktorKontakPaparan.maskerniosn,
+        ffp3: faktorKontakPaparan.ffp3,
+        goggle: faktorKontakPaparan.goggle,
+        tidakMemakaiApd: faktorKontakPaparan.tidakMemakaiApd,
+      });
+    });
+
   }
 
   onSave() {

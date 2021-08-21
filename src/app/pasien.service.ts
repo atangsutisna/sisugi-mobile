@@ -426,4 +426,41 @@ export class PasienService {
       );
 
   }
+
+  fetchFaktorKontakPaparan(id: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.loginService.getUser().value.token,
+        Accept: 'application/json',
+      }),
+    };
+
+    return this.httpClient
+      .get(environment.apiUri + '/pasien/' + id + '/faktor-paparan-kontak', httpOptions)
+      .pipe(
+        map((response: any) => {
+          const faktorPaparanKontak = response.data;
+          console.log(faktorPaparanKontak);
+          return {
+            keluarNegeri: faktorPaparanKontak.keluar_negeri,
+            transmisiLokal: faktorPaparanKontak.transmisi_lokal,
+            kunjunganFaskes: faktorPaparanKontak.kunjungan_faskes,
+            pasarHewan: faktorPaparanKontak.pasar_hewan,
+            kontakSuspek: faktorPaparanKontak.kontak_suspek,
+            kontakKonfirmasi: faktorPaparanKontak.kontak_konfirmasi,
+            ispaBerat: faktorPaparanKontak.ispa_berat,
+            petugasKesehatan: faktorPaparanKontak.petugas_kesehatan,
+            apd: faktorPaparanKontak.apd,
+            gown: faktorPaparanKontak.gown,
+            masker: faktorPaparanKontak.masker,
+            sarungTangan: faktorPaparanKontak.sarung_tangan,
+            maskerniosn: faktorPaparanKontak.maskerniosn,
+            ffp3: faktorPaparanKontak.ffp3,
+            goggle: faktorPaparanKontak.goggle,
+            tidakMemakaiApd: faktorPaparanKontak.tidak_memakai_apd,
+            aerosol: faktorPaparanKontak.aerosol
+          };
+        })
+      );
+  }
 }
