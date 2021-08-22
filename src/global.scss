@@ -33,3 +33,12 @@
   --ion-color-primary-shade: #8d51ad;
   --ion-color-primary-tint: #8d51ad;
 }
+.alert-tappable.alert-radio {
+  height: auto;
+  contain: content;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+  white-space: normal;
+}
