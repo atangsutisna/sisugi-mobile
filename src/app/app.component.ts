@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from './login/login.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -20,5 +22,13 @@ export class AppComponent {
       icon: 'trash',
     },
   ];
-  constructor() {}
+  constructor(
+    private loginServicec: LoginService,
+    private router: Router
+  ) {}
+
+  logout() {
+    this.loginServicec.logout();
+    this.router.navigateByUrl('/login');
+  }
 }
