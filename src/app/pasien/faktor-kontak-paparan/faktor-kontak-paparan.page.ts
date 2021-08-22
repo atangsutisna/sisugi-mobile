@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Pasien } from 'src/app/pasien.model';
 import { PasienService } from 'src/app/pasien.service';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { FaktorKontakPaparanService } from './faktor-kontak-paparan.service';
 
 @Component({
   selector: 'app-faktor-kontak-paparan',
@@ -49,7 +51,10 @@ export class FaktorKontakPaparanPage implements OnInit {
   faktorKontakPaparan: FaktorKontakPaparan;
   constructor(
     private pasienService: PasienService,
+    private faktorPaparanKontakService: FaktorKontakPaparanService,
     private activateRoute: ActivatedRoute,
+    private alertCtrl: AlertController,
+    private loadinCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -120,7 +125,66 @@ export class FaktorKontakPaparanPage implements OnInit {
 
   }
 
+  alert(inputHeader: string, inputMessage: string) {
+    this.alertCtrl
+      .create({
+        header: inputHeader,
+        message: inputMessage,
+        buttons: ['Ok'],
+      })
+      .then((toast) => {
+        toast.present();
+      });
+  }
+
   onSave() {
-    console.log('save to database');
+    if (this.form.invalid) {
+      this.alert('Warn', 'Mohon dilengkapi');
+      return;
+    }
+    this.loadinCtrl
+      .create({
+        message: 'Mohon tunggu',
+      })
+      .then((loading) => {
+        loading.present();
+        const faktorKontakPaparan = {
+          keluarNegeri: this.form.value.keluarNegeri,
+          transmisiLokal: this.form.value.transmisiLokal,
+          kunjunganFaskes: this.form.value.kunjunganFaskes,
+          pasarHewan: this.form.value.pasarHewan,
+          kontakSuspek: this.form.value.kontakSuspek,
+          kontakKonfirmasi: this.form.value.kontakKonfirmasi,
+          ispaBerat: this.form.value.ispaBerat,
+          petugasKesehatan: this.form.value.petugasKesehatan,
+          apd: this.form.value.apd,
+          gown: this.form.value.gown,
+          masker: this.form.value.masker,
+          sarungTangan: this.form.value.sarungTangan,
+          maskerniosn: this.form.value.maskerniosn,
+          ffp3: this.form.value.ffp3,
+          goggle: this.form.value.goggle,
+          tidakMemakaiApd: this.form.value.tidakMemakaiApd
+        };
+
+        this.faktorPaparanKontakService
+          .store(this.pasien.id, faktorKontakPaparan)
+          .subscribe(
+            (resp: any) => {
+              loading.dismiss();
+              this.alert('Info', 'Data sudah disimpan');
+            },
+            (error) => {
+              loading.dismiss();
+              if (error.status == 401) {
+                this.alert('Warn', 'Masa sesi habis, silakan login ulang');
+              }
+
+              if (error.status == 500) {
+                this.alert('Error', 'Internal Server Error');
+              }
+            }
+          );
+      });
   }
 }
