@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUri: 'http://sisugi-form.test/api',
+  perPage: 15,
 };

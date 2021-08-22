@@ -1,5 +1,7 @@
 {
   "name": "Sisugi Mobile",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

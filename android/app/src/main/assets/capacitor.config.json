@@ -1,0 +1,6 @@
+{
+	"appId": "com.sisugi.covid19",
+	"appName": "sisugi",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
