@@ -13,8 +13,8 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) {
     this.user.next({
-      loggedIn: true,
-      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJzaXN1Z2ktZm9ybTIudGVzdCIsImV4cCI6MTYyOTkzNTU0MywidXNlcl9pZCI6Mzk1LCJwdXNrZXNtYXNfaWQiOiIyODQ1In0.7v1B0VtH6Yfj0W-BHTjDrPwO4iEu2hu9m0pZBgZXV1jiZGPJQ4AtsqK4Tv8IDa1XbGdIJW_STHT5EmppyQ089A'
+      loggedIn: false,
+      token: null
     });
   }
 
