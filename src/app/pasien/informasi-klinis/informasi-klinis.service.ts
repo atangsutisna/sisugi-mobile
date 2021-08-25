@@ -22,9 +22,19 @@ export class InformasiKlinisService {
       }),
     };
 
+    let tanggalGejala = null;
+    if (informasKlinis.tanggalGejala != null) {
+      tanggalGejala = moment(informasKlinis.tanggalGejala).format('YYYY-MM-DD');
+    }
+
+    let tanggalMasukRs = null;
+    if (informasKlinis.tanggalMasukRs != null) {
+      tanggalMasukRs = moment(informasKlinis.tanggalMasukRs).format('YYYY-MM-DD');
+    }
+
     const reqBody = {
       'terdapat_gejala': informasKlinis.terdapatGejala,
-      'tanggal_gejala': moment(informasKlinis.tanggalGejala).format('YYYY-MM-DD'),
+      'tanggal_gejala': tanggalGejala,
       'demam': informasKlinis.demam,
       'batuk': informasKlinis.batuk,
       'pilek': informasKlinis.pilek,
@@ -53,7 +63,7 @@ export class InformasiKlinisService {
       'ket_komorbid_lainnya': informasKlinis.ketKomorbidLainnya,
       'dirawatdirs': informasKlinis.dirawatdirs,
       'namars': informasKlinis.namars,
-      'tanggal_masuk_rs': moment(informasKlinis.tanggalMasukRs).format('YYYY-MM-DD'),
+      'tanggal_masuk_rs': tanggalMasukRs,
       'icu': informasKlinis.icu,
       'intubasi': informasKlinis.intubasi,
       'emco': informasKlinis.emco,

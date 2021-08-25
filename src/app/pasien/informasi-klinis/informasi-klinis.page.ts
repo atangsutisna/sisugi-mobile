@@ -62,9 +62,7 @@ export class InformasiKlinisPage implements OnInit {
       terdapatGejala: new FormControl(null, {
         validators: [Validators.required],
       }),
-      tanggalGejala: new FormControl(null, {
-        validators: [Validators.required],
-      }),
+      tanggalGejala: new FormControl(null),
       demam: new FormControl(null),
       batuk: new FormControl(null),
       pilek: new FormControl(null),
@@ -281,7 +279,16 @@ export class InformasiKlinisPage implements OnInit {
   }
 
   onSave() {
+    console.log(this.form);
     if (this.form.invalid) {
+      console.log('Tidak diketahui');
+      this.alert('Warn', 'Mohon dilengkapi');
+      return;
+    }
+
+    if (this.form.value.terdapatGejala == '1'
+      && this.form.value.tanggalGejala == null) {
+      console.log('Mohon dilengkapi tanggal gejala');
       this.alert('Warn', 'Mohon dilengkapi');
       return;
     }
