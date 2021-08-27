@@ -54,7 +54,7 @@ export class InformasiKlinisPage implements OnInit {
     private activateRoute: ActivatedRoute,
     private informasiKlinisService: InformasiKlinisService,
     private alertCtrl: AlertController,
-    private loadinCtrl: LoadingController
+    private loadingCtrl: LoadingController,
   ) {}
 
   ngOnInit() {
@@ -293,7 +293,7 @@ export class InformasiKlinisPage implements OnInit {
       return;
     }
 
-    this.loadinCtrl
+    this.loadingCtrl
       .create({
         message: 'Mohon tunggu',
       })
