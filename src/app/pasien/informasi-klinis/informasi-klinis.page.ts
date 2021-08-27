@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PasienService } from 'src/app/pasien.service';
 import { Pasien } from 'src/app/pasien.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { InformasiKlinisService } from './informasi-klinis.service';
@@ -55,6 +55,7 @@ export class InformasiKlinisPage implements OnInit {
     private informasiKlinisService: InformasiKlinisService,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -346,7 +347,7 @@ export class InformasiKlinisPage implements OnInit {
           .subscribe(
             (resp: any) => {
               loading.dismiss();
-              this.alert('Info', 'Data sudah disimpan');
+              this.router.navigateByUrl('pasien/informasi-pemeriksaan-penunjang/' + this.pasien.id);
             },
             (error) => {
               loading.dismiss();
