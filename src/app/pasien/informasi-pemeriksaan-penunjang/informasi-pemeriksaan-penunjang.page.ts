@@ -1,7 +1,7 @@
 import { InformasiPemeriksaanPenunjang } from './informasi-pemeriksaan-penunjang.model';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Pasien } from 'src/app/pasien.model';
 import { PasienService } from 'src/app/pasien.service';
@@ -54,7 +54,8 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
     private activateRoute: ActivatedRoute,
     private informasPemeriksaanPenunjangService: InformasiPemeriksaanPenunjangService,
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -161,7 +162,7 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
       .subscribe(
         (resp: any) => {
           loading.dismiss();
-          this.alert('Info', 'Data sudah disimpan');
+          this.router.navigateByUrl('pasien/faktor-kontak-paparan/' + this.pasien.id);
         },
         (error) => {
           loading.dismiss();
