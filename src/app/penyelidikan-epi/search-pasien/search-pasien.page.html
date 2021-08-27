@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="penyelidikan-epi"></ion-back-button>
+    </ion-buttons>
+    <ion-searchbar
+      (ionChange)="doSearchPatient($event)"
+      placeholder="Cari Pasien"
+    >
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-group *ngIf="patients.length == 0">
+      <ion-item *ngFor="let number of [].constructor(7); let i = index;">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h2><ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text></h2>
+          <p><ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text></p>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+    <ion-item *ngFor="let patient of patients">
+      <ion-avatar slot="start">
+        <img
+          src="assets/male-patient.png"
+          *ngIf="patient.jenisKelamin == 'Laki-laki'"
+        />
+        <img
+          src="assets/female-patient.png"
+          *ngIf="patient.jenisKelamin == 'Perempuan'"
+        />
+        <img
+          src="assets/genderless.png"
+          *ngIf="patient.jenisKelamin !== 'Perempuan' && patient.jenisKelamin !== 'Laki-laki'"
+        />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ patient.nama }}</h2>
+        <p>{{ patient.idKasus }}</p>
+      </ion-label>
+      <!---
+      <div class="item-note" slot="end">
+        <ion-button
+          button
+          (click)="openActionSheet(patient.id, patient.nama, patient.idKasus)"
+          fill="clear"
+        >
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </ion-button>
+      </div>
+    -->
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="onPageScroll($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -8,38 +8,43 @@
 </ion-header>
 
 <ion-content>
-<ion-list>
-  <ion-item-group *ngIf="penyelidikanEpis.length == 0">
-    <ion-item *ngFor="let number of [].constructor(7); let i = index;">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" [routerLink]="['/penyelidikan-epi', 'search-pasien']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list>
+    <ion-item-group *ngIf="penyelidikanEpis.length == 0">
+      <ion-item *ngFor="let number of [].constructor(7); let i = index;">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h2><ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text></h2>
+          <p><ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text></p>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+    <ion-item *ngFor="let pe of penyelidikanEpis">
       <ion-avatar slot="start">
-        <ion-skeleton-text animated></ion-skeleton-text>
+        <img src="assets/test-results.png"/>
       </ion-avatar>
       <ion-label>
-        <h2><ion-skeleton-text animated style="width: 50%;"></ion-skeleton-text></h2>
-        <p><ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text></p>
+        <small>{{ pe.tanggalWawancara | date}}</small>
+        <h2>{{ pe.idKasus }} - {{ pe.pasienNama }}</h2>
       </ion-label>
+      <!---
+      <div class="item-note" slot="end">
+        <ion-button
+          button
+          (click)="openActionSheet(pe.pasienId, pe.pasienNama, pe.idKasus)"
+          fill="clear"
+        >
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </ion-button>
+      </div>
+    -->
     </ion-item>
-  </ion-item-group>
-  <ion-item *ngFor="let pe of penyelidikanEpis">
-    <ion-avatar slot="start">
-      <img src="assets/test-results.png"/>
-    </ion-avatar>
-    <ion-label>
-      <small>{{ pe.tanggalWawancara | date}}</small>
-      <h2>{{ pe.idKasus }} - {{ pe.pasienNama }}</h2>
-    </ion-label>
-    <!---
-    <div class="item-note" slot="end">
-      <ion-button
-        button
-        (click)="openActionSheet(pe.pasienId, pe.pasienNama, pe.idKasus)"
-        fill="clear"
-      >
-        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-      </ion-button>
-    </div>
-  -->
-  </ion-item>
 
-</ion-list>
+  </ion-list>
 </ion-content>
