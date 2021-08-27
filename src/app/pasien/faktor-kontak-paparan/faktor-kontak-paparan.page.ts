@@ -1,7 +1,7 @@
 import { FaktorKontakPaparan } from './faktor-kontak-paparan.model';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Pasien } from 'src/app/pasien.model';
 import { PasienService } from 'src/app/pasien.service';
 import { AlertController, LoadingController } from '@ionic/angular';
@@ -54,7 +54,8 @@ export class FaktorKontakPaparanPage implements OnInit {
     private faktorPaparanKontakService: FaktorKontakPaparanService,
     private activateRoute: ActivatedRoute,
     private alertCtrl: AlertController,
-    private loadinCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -142,7 +143,7 @@ export class FaktorKontakPaparanPage implements OnInit {
       this.alert('Warn', 'Mohon dilengkapi');
       return;
     }
-    this.loadinCtrl
+    this.loadingCtrl
       .create({
         message: 'Mohon tunggu',
       })
@@ -172,7 +173,7 @@ export class FaktorKontakPaparanPage implements OnInit {
           .subscribe(
             (resp: any) => {
               loading.dismiss();
-              this.alert('Info', 'Data sudah disimpan');
+              this.router.navigateByUrl('pasien/catatan/' + this.pasien.id);
             },
             (error) => {
               loading.dismiss();
