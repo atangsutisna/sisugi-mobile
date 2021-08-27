@@ -1,7 +1,8 @@
 import { PenyelidikanEpi } from './penyelidikan-epi.model';
 import { Component, OnInit } from '@angular/core';
 import { PenyelidikanEpiService } from './penyelidikan-epi.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ActionSheetController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-penyelidikan-epi',
@@ -13,7 +14,9 @@ export class PenyelidikanEpiPage implements OnInit {
   penyelidikanEpis: PenyelidikanEpi[];
   constructor(
     private penyelidikanEpiService: PenyelidikanEpiService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private actionSheetCtrl: ActionSheetController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -55,5 +58,21 @@ export class PenyelidikanEpiPage implements OnInit {
       });
   }
 
+  async openActionSheet(id: string, nama: string, idKasus: string) {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: idKasus + ' - ' + nama,
+      buttons: [
+        {
+          text: 'Buka',
+          icon: 'information-circle-outline',
+          handler: () => {
+            this.router.navigateByUrl('/pasien/profile/' + id);
+          },
+        },
+      ],
+    });
 
+    await actionSheet.present();
+    actionSheet.onDidDismiss();
+  }
 }
