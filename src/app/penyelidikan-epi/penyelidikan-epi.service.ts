@@ -24,7 +24,7 @@ export class PenyelidikanEpiService {
       }),
     };
 
-    const apiUri = new URL(environment.apiUri + '/pasien');
+    const apiUri = new URL(environment.apiUri + '/penyelidikan-epi');
     apiUri.searchParams.append('page', page.toString());
     apiUri.searchParams.append('size', environment.perPage.toString());
     apiUri.searchParams.append('sort', 'created');
@@ -40,7 +40,7 @@ export class PenyelidikanEpiService {
             pasienId: pe.pasien_id,
             pasienNama: pe.pasien_nama,
             tanggalWawancara: new Date(pe.tanggal_wawancara),
-            lastStep: null
+            lastStep: pe.last_step
           });
         }
 

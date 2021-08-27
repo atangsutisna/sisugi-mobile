@@ -25,7 +25,6 @@ export class PenyelidikanEpiPage implements OnInit {
     this.penyelidikanEpiService.fetchAll(this.page)
           .subscribe(
             (resp: any) => {
-            console.log(resp);
             if (resp.status == 0) {
               this.alert('Error', 'Failed connect to server');
               return;
