@@ -54,7 +54,7 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
     private activateRoute: ActivatedRoute,
     private informasPemeriksaanPenunjangService: InformasiPemeriksaanPenunjangService,
     private alertCtrl: AlertController,
-    private loadinCtrl: LoadingController
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -127,7 +127,7 @@ export class InformasiPemeriksaanPenunjangPage implements OnInit {
   }
 
   onSave() {
-    this.loadinCtrl.create({
+    this.loadingCtrl.create({
       message: 'Mohon tunggu'
     }).then(loading => {
       loading.present();
