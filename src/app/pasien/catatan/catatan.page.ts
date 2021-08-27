@@ -16,6 +16,7 @@ export class CatatanPage implements OnInit {
   catatan: CatatanPasien;
   form: FormGroup;
   id: string;
+  backUri = '/pasien/profile/';
   constructor(private pasienService: PasienService,
               private statusEpidService: StatusEpiService,
               private activateRoute: ActivatedRoute,
@@ -35,6 +36,7 @@ export class CatatanPage implements OnInit {
 
   ionViewWillEnter() {
     this.id = this.activateRoute.snapshot.params.id;
+    this.backUri += this.id;
     this.pasienService.fetchCatatan(this.id).subscribe(
       (catatan: CatatanPasien) => {
         this.catatan = catatan;
