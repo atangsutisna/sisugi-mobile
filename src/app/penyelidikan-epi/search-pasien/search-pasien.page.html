@@ -24,7 +24,7 @@
         </ion-label>
       </ion-item>
     </ion-item-group>
-    <ion-item *ngFor="let patient of patients">
+    <ion-item *ngFor="let patient of patients" [routerLink]="['/pasien/penyelidikan-epi', patient.id]">
       <ion-avatar slot="start">
         <img
           src="assets/male-patient.png"
