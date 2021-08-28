@@ -132,7 +132,7 @@ export class PenyelidikanEpiPage implements OnInit {
       this.penyelidikanEpiService.store(penyelidikanEpi).subscribe(
         (resp: any) => {
           loading.dismiss();
-          this.alert('Info', 'Data sudah disimpan');
+          this.router.navigateByUrl('/pasien/informasi-klinis/'+ this.pasien.id);
         },
         (error) => {
           loading.dismiss();
