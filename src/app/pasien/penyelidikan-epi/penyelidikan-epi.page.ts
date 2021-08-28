@@ -62,6 +62,7 @@ export class PenyelidikanEpiPage implements OnInit {
         Validators.required
       ])
     });
+
   }
 
   ionViewWillEnter() {
@@ -75,6 +76,12 @@ export class PenyelidikanEpiPage implements OnInit {
           pasien.kelurahanId == null) {
           this.confirm('Warn', 'Data pasien belum lengkap. Apakah anda mau melengkapi?');
       }
+    });
+
+    this.pasienService.fetchPe(id).subscribe((pe: any) => {
+      this.form.patchValue({
+        tanggalWawancara: pe.tanggalWawancara
+      });
     });
   }
 
