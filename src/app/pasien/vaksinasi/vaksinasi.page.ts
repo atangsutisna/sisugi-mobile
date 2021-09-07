@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { PasienService } from 'src/app/pasien.service';
 import { VaksinasiPasien } from 'src/app/vaksinasi-vasian.model';
+import { VaksinasiService } from './vaksinasi.service';
 
 @Component({
   selector: 'app-vaksinasi',
@@ -15,8 +16,10 @@ export class VaksinasiPage implements OnInit {
   id: string;
   backUri = '/pasien/profile/';
   constructor(private pasienService: PasienService,
+              private vaksinasService: VaksinasiService,
               private activateRoute: ActivatedRoute,
-              private alertCtrl: AlertController) { }
+              private alertCtrl: AlertController,
+              private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -65,6 +68,41 @@ export class VaksinasiPage implements OnInit {
       .then((toast) => {
         toast.present();
       });
+  }
+
+  onSave() {
+    if (this.form.invalid) {
+      this.alert('Warn', 'Mohon dilengkapi');
+      return;
+    }
+
+    this.loadingCtrl.create({
+      message: 'Mohon tunggu'
+    }).then(loading => {
+      loading.present();
+
+      const vaksinasiPerson = {
+        vaksinasi: this.form.value.vaksinasi,
+        tglDosis1: this.form.value.tglDosis1,
+        tglDosis2: this.form.value.tglDosis2,
+      };
+      this.vaksinasService.store(this.id, vaksinasiPerson).subscribe(
+        (resp: any) => {
+          loading.dismiss();
+          this.alert('Info', 'Data sudah disimpan');
+        },
+        (error) => {
+          loading.dismiss();
+          if (error.status == 401) {
+            this.alert('Error', 'Sesi telah habis silakan login ulang');
+          }
+          if (error.status == 500) {
+            this.alert('Error', 'Internal Server Error');
+          }
+
+        }
+      );
+    });
   }
 
 }

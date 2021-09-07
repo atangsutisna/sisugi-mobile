@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Vaksinasi</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="onSave()">
         <ion-icon name="save-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -48,7 +48,8 @@
     <ion-col>
       <ion-button
         color="primary"
-        expand="block">
+        expand="block"
+        (click)="onSave()">
         Simpan
       </ion-button>
     </ion-col>
