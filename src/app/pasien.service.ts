@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { Isoman } from './isoman.model';
 import { CatatanPasien } from './catatan-pasien.model';
 import { InformasiKlinis } from './pasien/informasi-klinis/informasi-klinis.model';
+import { VaksinasiPasien } from './vaksinasi-vasian.model';
 
 @Injectable({
   providedIn: 'root',
@@ -463,4 +464,33 @@ export class PasienService {
         })
       );
   }
+
+  fetchVaksinasi(id: string): Observable<VaksinasiPasien> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.loginService.getUser().value.token,
+        Accept: 'application/json',
+      }),
+    };
+
+    return this.httpClient
+      .get(environment.apiUri + '/pasien/' + id + '/vaksinasi', httpOptions)
+      .pipe(map((resp: any) => {
+        let vaksinasi = null;
+        if (resp.data.vaksinasi !== null && resp.data.vaksinasi == 1) {
+          vaksinasi = '1';
+        }
+
+        if (resp.data.vaksinasi !== null && resp.data.vaksinasi == 0) {
+          vaksinasi = '0';
+        }
+
+        return {
+          vaksinasi: vaksinasi,
+          tglDosis1: resp.data.tgl_dosis_1,
+          tglDosis2: resp.data.tgl_dosis_2,
+        };
+      }));
+  }
+
 }
